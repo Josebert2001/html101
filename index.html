@@ -52,10 +52,20 @@ main{max-width:980px;margin:0 auto;padding:0 1rem 4rem}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3C3489);border-radius:20px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
 .prog-lbl{font-size:13px;color:var(--text-secondary);margin-top:10px;font-variant-numeric:tabular-nums}
 
-.roadmap{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.howto{max-width:600px;margin:0 auto 2rem;padding:.85rem 1.1rem;background:var(--accent-soft);border:1px solid #C9DDF1;border-radius:var(--radius-md);font-size:13.5px;color:var(--accent-dark);line-height:1.55;display:flex;align-items:flex-start;gap:10px}
+.howto-mark{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-mono)}
+.howto strong{font-weight:600}
+
+.roadmap{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
 .rm{font-size:12px;background:var(--bg-card);border:1px solid var(--border);padding:7px 12px;border-radius:20px;color:var(--text-secondary);font-weight:500;display:flex;align-items:center;gap:7px;text-decoration:none;transition:border-color .15s}
 .rm:hover{border-color:var(--accent);color:var(--text-primary)}
 .rm-num{width:18px;height:18px;border-radius:50%;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--text-secondary)}
+
+.play-first{margin-bottom:1.25rem;text-align:center;padding:0 .5rem}
+.play-first .sec-num{display:inline-block;font-size:11px;font-weight:600;color:var(--text-tertiary);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+.play-first h2{font-size:22px;font-weight:600;color:var(--text-primary);letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+.play-first p{font-size:14px;color:var(--text-secondary);max-width:540px;margin:0 auto;line-height:1.6}
+.play-first .arrow{font-size:18px;color:var(--text-tertiary);margin-top:8px}
 
 .section{margin-bottom:3rem;scroll-margin-top:80px}
 .section-hd{margin-bottom:1.25rem;padding:0 .25rem}
@@ -243,8 +253,13 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <h1>Learn the <em>words</em> before you write the code.</h1>
   <p>An interactive glossary of every term you need to read, write, and understand HTML and CSS. Tap a card, try the demos, take the quiz &mdash; and by the end you&rsquo;ll be ready to build your first real page.</p>
   <div class="prog-wrap" role="progressbar" aria-label="Concepts unlocked" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="prog"><div class="prog-fill" id="pfill"></div></div>
-  <p class="prog-lbl" id="plbl">0 of 20 concepts unlocked</p>
+  <p class="prog-lbl" id="plbl">Start here &rarr;</p>
 </section>
+
+<aside class="howto" role="note">
+  <span class="howto-mark">i</span>
+  <span><strong>How this works:</strong> Click any card to expand it, drag the sliders, type in the playground. Nothing is saved &mdash; explore freely and come back any time.</span>
+</aside>
 
 <nav class="roadmap" aria-label="Learning roadmap">
   <a class="rm" href="#foundations"><span class="rm-num">1</span>HTML Foundations</a>
@@ -252,6 +267,88 @@ footer a:hover{color:var(--accent);text-decoration:underline}
   <a class="rm" href="#naming"><span class="rm-num">3</span>Naming &amp; IDs</a>
   <a class="rm" href="#css"><span class="rm-num">4</span>CSS Styling</a>
 </nav>
+
+<!-- ========== PLAY FIRST: demos before concepts ========== -->
+<div class="play-first">
+  <span class="sec-num">Try it first</span>
+  <h2>Play around &mdash; vocabulary comes after</h2>
+  <p>You don&rsquo;t need to know what anything is called yet. Move the sliders. Edit some code. Watch what happens. Then scroll down for the words.</p>
+  <div class="arrow" aria-hidden="true">&darr;</div>
+</div>
+
+<!-- Box model interactive (moved up) -->
+<section class="demo" aria-label="Box model playground">
+  <div class="demo-hd">
+    <div class="demo-hd-l">
+      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+      <h3>Drag the sliders &mdash; watch a box change shape</h3>
+    </div>
+  </div>
+  <div class="box-model">
+    <div class="bm-ctrls">
+      <div class="bm-ctrl">
+        <label>Margin <span style="color:var(--text-tertiary);font-weight:400">(outside)</span> <b id="m-val">24px</b></label>
+        <input type="range" min="0" max="60" value="24" step="2" id="m-slide" aria-label="Margin">
+      </div>
+      <div class="bm-ctrl">
+        <label>Border <span style="color:var(--text-tertiary);font-weight:400">(the edge)</span> <b id="b-val">2px</b></label>
+        <input type="range" min="0" max="20" value="2" step="1" id="b-slide" aria-label="Border">
+      </div>
+      <div class="bm-ctrl">
+        <label>Padding <span style="color:var(--text-tertiary);font-weight:400">(inside)</span> <b id="p-val">18px</b></label>
+        <input type="range" min="0" max="60" value="18" step="2" id="p-slide" aria-label="Padding">
+      </div>
+    </div>
+    <div class="bm-visual">
+      <div class="bm-margin" id="bm-m"><div class="bm-border" id="bm-b"><div class="bm-padding" id="bm-p"><div class="bm-content">Content</div></div></div></div>
+    </div>
+    <div class="bm-legend">
+      <div class="bm-li"><div class="bm-sw" style="background:var(--warning-bg);border:1.5px dashed var(--warning-border)"></div>Margin (outside the box)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:#FCE3DC;border:1.5px solid #B5421C"></div>Border (the edge)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:var(--accent-soft);border:1.5px dashed #85B7EB"></div>Padding (inside the box)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:var(--accent)"></div>Content</div>
+    </div>
+  </div>
+</section>
+
+<!-- Live playground (moved up) -->
+<section class="demo playground" id="playground" aria-label="Live HTML and CSS playground">
+  <div class="pg-hd">
+    <span class="pg-hd-title">Live playground &mdash; type and see</span>
+    <div class="pg-actions">
+      <button class="btn btn-ghost" onclick="resetPG()" type="button">Reset</button>
+      <button class="btn" onclick="runPG()" type="button">Run &#9654;</button>
+    </div>
+  </div>
+  <div class="pg-tip">Don&rsquo;t worry about understanding it yet &mdash; just change something on the left and see the preview update.</div>
+  <div class="pg-presets" id="pg-presets">
+    <button class="preset" data-preset="card" type="button">Profile card</button>
+    <button class="preset" data-preset="list" type="button">Styled list</button>
+    <button class="preset" data-preset="hero" type="button">Hero section</button>
+    <button class="preset" data-preset="form" type="button">Contact form</button>
+  </div>
+  <div class="pg-eds">
+    <div class="pg-ed">
+      <div class="ed-lbl"><span class="lbl-dot" style="background:#712B13"></span>HTML</div>
+      <textarea class="pg-ta" id="pg-html" spellcheck="false"></textarea>
+    </div>
+    <div class="pg-ed">
+      <div class="ed-lbl"><span class="lbl-dot" style="background:#185FA5"></span>CSS</div>
+      <textarea class="pg-ta" id="pg-css" spellcheck="false"></textarea>
+    </div>
+  </div>
+  <div class="pg-prev">
+    <div class="pg-prev-lbl">Preview</div>
+    <div class="frame-wrap"><iframe id="pg-frame" class="pg-frame" title="Live preview"></iframe></div>
+  </div>
+</section>
+
+<!-- Now the vocabulary -->
+<div class="play-first" style="margin-top:1rem">
+  <span class="sec-num">Now the vocabulary</span>
+  <h2>What were those words?</h2>
+  <p>You just played with HTML and CSS. The next four sections name everything you saw &mdash; tap a card whenever something catches your eye.</p>
+</div>
 
 <!-- ========== SECTION 1: HTML FOUNDATIONS ========== -->
 <section class="section" id="foundations">
@@ -373,73 +470,6 @@ HTML and CSS.<span class="an-tag">&lt;/p&gt;</span>
       <div class="an-label"><b><span class="swatch" style="background:#0F6E56"></span>Value</b><span style="font-family:var(--font-mono)">white</span>, <span style="font-family:var(--font-mono)">#185FA5</span> &mdash; what to change it to</div>
       <div class="an-label"><b>Declaration</b>One <span style="font-family:var(--font-mono)">property: value;</span> pair. End each with a semicolon.</div>
     </div>
-  </div>
-</section>
-
-<!-- Box model interactive -->
-<section class="demo" aria-label="Box model playground">
-  <div class="demo-hd">
-    <div class="demo-hd-l">
-      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
-      <h3>Interactive box model &mdash; drag the sliders</h3>
-    </div>
-  </div>
-  <div class="box-model">
-    <div class="bm-ctrls">
-      <div class="bm-ctrl">
-        <label>Margin <span style="color:var(--text-tertiary);font-weight:400">(outside)</span> <b id="m-val">24px</b></label>
-        <input type="range" min="0" max="60" value="24" step="2" id="m-slide" aria-label="Margin">
-      </div>
-      <div class="bm-ctrl">
-        <label>Border <span style="color:var(--text-tertiary);font-weight:400">(the edge)</span> <b id="b-val">2px</b></label>
-        <input type="range" min="0" max="20" value="2" step="1" id="b-slide" aria-label="Border">
-      </div>
-      <div class="bm-ctrl">
-        <label>Padding <span style="color:var(--text-tertiary);font-weight:400">(inside)</span> <b id="p-val">18px</b></label>
-        <input type="range" min="0" max="60" value="18" step="2" id="p-slide" aria-label="Padding">
-      </div>
-    </div>
-    <div class="bm-visual">
-      <div class="bm-margin" id="bm-m"><div class="bm-border" id="bm-b"><div class="bm-padding" id="bm-p"><div class="bm-content">Content</div></div></div></div>
-    </div>
-    <div class="bm-legend">
-      <div class="bm-li"><div class="bm-sw" style="background:var(--warning-bg);border:1.5px dashed var(--warning-border)"></div>Margin (outside the box)</div>
-      <div class="bm-li"><div class="bm-sw" style="background:#FCE3DC;border:1.5px solid #B5421C"></div>Border (the edge)</div>
-      <div class="bm-li"><div class="bm-sw" style="background:var(--accent-soft);border:1.5px dashed #85B7EB"></div>Padding (inside the box)</div>
-      <div class="bm-li"><div class="bm-sw" style="background:var(--accent)"></div>Content</div>
-    </div>
-  </div>
-</section>
-
-<!-- Live playground -->
-<section class="demo playground" id="playground" aria-label="Live HTML and CSS playground">
-  <div class="pg-hd">
-    <span class="pg-hd-title">Live playground</span>
-    <div class="pg-actions">
-      <button class="btn btn-ghost" onclick="resetPG()" type="button">Reset</button>
-      <button class="btn" onclick="runPG()" type="button">Run &#9654;</button>
-    </div>
-  </div>
-  <div class="pg-tip">Type HTML on the left, CSS on the right. The preview updates as you type.</div>
-  <div class="pg-presets" id="pg-presets">
-    <button class="preset" data-preset="card" type="button">Profile card</button>
-    <button class="preset" data-preset="list" type="button">Styled list</button>
-    <button class="preset" data-preset="hero" type="button">Hero section</button>
-    <button class="preset" data-preset="form" type="button">Contact form</button>
-  </div>
-  <div class="pg-eds">
-    <div class="pg-ed">
-      <div class="ed-lbl"><span class="lbl-dot" style="background:#712B13"></span>HTML</div>
-      <textarea class="pg-ta" id="pg-html" spellcheck="false"></textarea>
-    </div>
-    <div class="pg-ed">
-      <div class="ed-lbl"><span class="lbl-dot" style="background:#185FA5"></span>CSS</div>
-      <textarea class="pg-ta" id="pg-css" spellcheck="false"></textarea>
-    </div>
-  </div>
-  <div class="pg-prev">
-    <div class="pg-prev-lbl">Preview</div>
-    <div class="frame-wrap"><iframe id="pg-frame" class="pg-frame" title="Live preview"></iframe></div>
   </div>
 </section>
 
@@ -636,17 +666,23 @@ function renderCards(){
 }
 
 let unlocked=0;
+function updProgress(){
+  document.getElementById('pfill').style.width=Math.round(unlocked/TOTAL*100)+'%';
+  document.getElementById('plbl').innerHTML=unlocked===0?'Start here &rarr;':unlocked+' of '+TOTAL+' concepts unlocked';
+  document.getElementById('prog').setAttribute('aria-valuenow',unlocked);
+}
 function reveal(i){
   const card=document.getElementById('kc'+i),def=document.getElementById('db'+i);
-  const wasOpen=def.classList.contains('open');
   def.classList.toggle('open');
-  card.setAttribute('aria-expanded',!wasOpen);
-  if(!wasOpen && !card.classList.contains('done')){
+  card.setAttribute('aria-expanded',def.classList.contains('open'));
+  if(!card.classList.contains('done')){
     card.classList.add('done');unlocked++;
-    document.getElementById('pfill').style.width=Math.round(unlocked/TOTAL*100)+'%';
-    document.getElementById('plbl').textContent=unlocked+' of '+TOTAL+' concepts unlocked';
-    document.getElementById('prog').setAttribute('aria-valuenow',unlocked);
+    updProgress();
   }
+}
+function peekFirst(){
+  const def=document.getElementById('db0'),card=document.getElementById('kc0');
+  if(def && card){def.classList.add('open');card.setAttribute('aria-expanded','true');}
 }
 
 /* ============================================================
@@ -822,6 +858,7 @@ function resetCL(){
    BOOT
    ============================================================ */
 renderCards();
+peekFirst();
 renderQ();
 renderCL();
 loadPreset('card');
