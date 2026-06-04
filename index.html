@@ -1,431 +1,830 @@
 <!DOCTYPE html>
-<div style="padding:0.5rem 0 3rem; font-family: var(--font-sans);">
-
-<h2 class="sr-only">Interactive HTML and CSS glossary for beginners with live demos and quiz</h2>
-
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A friendly, interactive glossary that teaches HTML and CSS to absolute beginners. Live demos, a code playground, and quizzes that make the basics actually stick.">
+<meta name="theme-color" content="#185FA5">
+<title>HTML & CSS 101 — Learn the basics, interactively</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-.hero{text-align:center;padding:2rem 1rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:2rem}
-.hero-badge{display:inline-block;background:#E6F1FB;color:#0C447C;font-size:11px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:12px;letter-spacing:.5px;text-transform:uppercase}
-.hero h1{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px}
-.hero p{font-size:15px;color:var(--color-text-secondary);line-height:1.6;max-width:520px;margin:0 auto 1.2rem}
-.prog-wrap{background:var(--color-background-secondary);border-radius:20px;height:8px;max-width:380px;margin:0 auto;overflow:hidden}
-.prog-fill{height:100%;background:#185FA5;border-radius:20px;transition:width .4s ease;width:0%}
-.prog-lbl{font-size:12px;color:var(--color-text-secondary);margin-top:6px}
-.sec-lbl{font-size:12px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.8px;padding:0 1rem;margin-bottom:1rem}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px;padding:0 1rem;margin-bottom:2.5rem}
-.kcard{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem;cursor:pointer;transition:border-color .2s,transform .15s;position:relative;overflow:hidden}
-.kcard:hover{border-color:var(--color-border-secondary);transform:translateY(-1px)}
-.kcard.done{border-color:#0F6E56}
-.kcard.done::after{content:'✓';position:absolute;top:10px;right:12px;font-size:13px;color:#0F6E56;font-weight:500}
-.ktag{display:inline-block;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;margin-bottom:10px}
-.thtml{background:#FAECE7;color:#712B13}.tcss{background:#E6F1FB;color:#0C447C}.tboth{background:#EEEDFE;color:#3C3489}
-.kcard h3{font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
-.kcard .tagline{font-size:13px;color:var(--color-text-secondary);line-height:1.5;margin-bottom:10px}
-.reveal-hint{font-size:12px;color:#185FA5;background:none;border:none;padding:0;font-family:var(--font-sans);cursor:pointer}
-.defbox{margin-top:12px;padding:12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:13px;color:var(--color-text-primary);line-height:1.7;display:none}
-.defbox.open{display:block}
-.analogy{margin-top:8px;font-style:italic;color:var(--color-text-secondary);border-left:2px solid var(--color-border-secondary);padding-left:10px}
-.demo-wrap{padding:0 1rem;margin-bottom:2.5rem}
-.dbox{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
-.dhead{padding:.9rem 1.25rem;border-bottom:.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:8px}
-.ddot{width:8px;height:8px;border-radius:50%}
-.dhead h3{font-size:15px;font-weight:500;color:var(--color-text-primary)}
-.dbody{display:grid;grid-template-columns:1fr 1fr}
-.dcode{padding:1.25rem;background:var(--color-background-secondary);font-family:var(--font-mono);font-size:12px;line-height:1.9;border-right:.5px solid var(--color-border-tertiary)}
-.dpreview{padding:1.25rem;display:flex;align-items:center;justify-content:center;min-height:90px}
-.dlabel{font-size:11px;color:var(--color-text-secondary);padding:8px 1.25rem;border-top:.5px solid var(--color-border-tertiary);display:flex;gap:8px;flex-wrap:wrap}
-.dlabel span{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:2px 8px}
-.ht{color:#993C1D}.ha{color:#185FA5}.hv{color:#3B6D11}.hx{color:var(--color-text-primary)}
-.pm-wrap{padding:0 1rem;margin-bottom:2.5rem}
-.pmbox{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
-.pm-ctrls{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
-.pm-ctrl{flex:1;min-width:140px}
-.pm-ctrl label{font-size:12px;color:var(--color-text-secondary);display:flex;justify-content:space-between;margin-bottom:6px}
-.pm-ctrl label b{font-weight:500;color:var(--color-text-primary)}
-.pm-visual{display:flex;align-items:center;justify-content:center;min-height:170px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
-.pm-margin{background:#FAEEDA;border:1.5px dashed #EF9F27;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .2s}
-.pm-padding{background:#E6F1FB;border:1.5px dashed #85B7EB;display:flex;align-items:center;justify-content:center;transition:all .2s;border-radius:4px}
-.pm-content{background:#185FA5;color:#fff;font-size:12px;padding:8px 14px;border-radius:4px;white-space:nowrap}
-.pm-leg{display:flex;gap:1rem;margin-top:10px;flex-wrap:wrap}
-.pm-li{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-secondary)}
-.pm-sw{width:14px;height:14px;border-radius:3px}
-.sand-wrap{padding:0 1rem;margin-bottom:2.5rem}
-.sandbox{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
-.sand-hdr{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.25rem;border-bottom:.5px solid var(--color-border-tertiary)}
-.sand-hdr span{font-size:14px;font-weight:500;color:var(--color-text-primary)}
-.run-btn{background:#185FA5;color:#fff;border:none;border-radius:var(--border-radius-md);padding:6px 14px;font-size:12px;font-family:var(--font-sans);cursor:pointer}
-.run-btn:hover{background:#0C447C}
-.sand-eds{display:grid;grid-template-columns:1fr 1fr}
-.sand-ed{padding:1rem}
-.ed-lbl{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.sand-ta{width:100%;font-family:var(--font-mono);font-size:12px;line-height:1.7;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px;color:var(--color-text-primary);resize:vertical;min-height:140px;outline:none}
-.sand-ta:focus{border-color:var(--color-border-secondary)}
-.sand-prev{padding:1rem;border-top:.5px solid var(--color-border-tertiary)}
-.prev-lbl{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.iframe-wrap{background:#fff;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-tertiary);overflow:hidden}
-.sand-frame{width:100%;border:none;display:block;height:120px}
-.quiz-wrap{padding:0 1rem;margin-bottom:2.5rem}
-.qbox{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
-.quiz-q{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem;line-height:1.5}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-page:#F7F5F0;--bg-card:#FFFFFF;--bg-soft:#F1EFE9;--bg-code:#FAF8F3;
+  --text-primary:#1F1E1B;--text-secondary:#5C5852;--text-tertiary:#8B8780;
+  --border:#E4E0D6;--border-strong:#CDC8BA;
+  --accent:#185FA5;--accent-dark:#0C447C;--accent-soft:#E6F1FB;
+  --html-bg:#FAECE7;--html-fg:#712B13;
+  --css-bg:#E6F1FB;--css-fg:#0C447C;
+  --both-bg:#EEEDFE;--both-fg:#3C3489;
+  --success:#0F6E56;--success-soft:#E1F5EE;
+  --warning-bg:#FAEEDA;--warning-border:#EF9F27;
+  --error:#993C1D;--error-soft:#FAECE7;
+  --radius-sm:6px;--radius-md:10px;--radius-lg:14px;
+  --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,'SF Mono',Consolas,monospace;
+  --shadow-sm:0 1px 2px rgba(20,18,14,.04);
+  --shadow-md:0 4px 14px rgba(20,18,14,.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-sans);background:var(--bg-page);color:var(--text-primary);line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+.skip{position:absolute;left:-9999px;background:var(--accent);color:#fff;padding:8px 16px;border-radius:6px;z-index:100;text-decoration:none}
+.skip:focus{left:1rem;top:1rem}
+
+.topbar{border-bottom:1px solid var(--border);padding:.75rem 1rem;position:sticky;top:0;z-index:50;background:rgba(247,245,240,.88);backdrop-filter:saturate(180%) blur(10px);-webkit-backdrop-filter:saturate(180%) blur(10px)}
+.topbar-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:600;color:var(--text-primary);font-size:14px;letter-spacing:-.01em;text-decoration:none}
+.brand-mark{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,#185FA5,#3C3489);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:var(--font-mono)}
+.topnav{display:flex;gap:.15rem;font-size:13px}
+.topnav a{color:var(--text-secondary);text-decoration:none;padding:6px 12px;border-radius:6px;transition:background .15s,color .15s}
+.topnav a:hover{background:var(--bg-soft);color:var(--text-primary)}
+
+main{max-width:980px;margin:0 auto;padding:0 1rem 4rem}
+
+.hero{text-align:center;padding:3.5rem 1rem 2.5rem;margin-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.hero-badge{display:inline-block;background:var(--accent-soft);color:var(--accent-dark);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.6px;text-transform:uppercase}
+.hero h1{font-size:38px;font-weight:600;color:var(--text-primary);margin-bottom:14px;letter-spacing:-.025em;line-height:1.15}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:500}
+.hero p{font-size:16px;color:var(--text-secondary);line-height:1.65;max-width:560px;margin:0 auto 1.5rem}
+.prog-wrap{background:var(--bg-soft);border-radius:20px;height:8px;max-width:420px;margin:0 auto;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),#3C3489);border-radius:20px;transition:width .5s cubic-bezier(.4,0,.2,1);width:0%}
+.prog-lbl{font-size:13px;color:var(--text-secondary);margin-top:10px;font-variant-numeric:tabular-nums}
+
+.roadmap{display:flex;gap:.4rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.rm{font-size:12px;background:var(--bg-card);border:1px solid var(--border);padding:7px 12px;border-radius:20px;color:var(--text-secondary);font-weight:500;display:flex;align-items:center;gap:7px;text-decoration:none;transition:border-color .15s}
+.rm:hover{border-color:var(--accent);color:var(--text-primary)}
+.rm-num{width:18px;height:18px;border-radius:50%;background:var(--bg-soft);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:var(--text-secondary)}
+
+.section{margin-bottom:3rem;scroll-margin-top:80px}
+.section-hd{margin-bottom:1.25rem;padding:0 .25rem}
+.sec-num{display:inline-block;font-size:11px;font-weight:600;color:var(--text-tertiary);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+.section-hd h2{font-size:24px;font-weight:600;color:var(--text-primary);letter-spacing:-.015em;margin-bottom:6px;line-height:1.25}
+.section-hd p{font-size:14px;color:var(--text-secondary);max-width:620px;line-height:1.6}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.kcard{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;cursor:pointer;transition:border-color .2s,transform .15s,box-shadow .2s;position:relative;overflow:hidden;text-align:left;font-family:inherit;font-size:inherit;color:inherit;width:100%}
+.kcard:hover{border-color:var(--border-strong);transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.kcard:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.kcard.done{border-color:var(--success);background:linear-gradient(180deg,rgba(15,110,86,.03),transparent 60%)}
+.kcard.done::after{content:'✓';position:absolute;top:14px;right:14px;font-size:12px;color:#fff;font-weight:700;background:var(--success);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.ktag{display:inline-block;font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;margin-bottom:12px;letter-spacing:.4px;text-transform:uppercase}
+.t-html{background:var(--html-bg);color:var(--html-fg)}
+.t-css{background:var(--css-bg);color:var(--css-fg)}
+.t-both{background:var(--both-bg);color:var(--both-fg)}
+.kcard h3{font-size:17px;font-weight:600;color:var(--text-primary);margin-bottom:6px;letter-spacing:-.01em;display:flex;align-items:center;gap:6px}
+.kcard h3 code{font-family:var(--font-mono);font-size:14px;background:var(--bg-soft);padding:1px 7px;border-radius:4px;font-weight:500}
+.tagline{font-size:13.5px;color:var(--text-secondary);line-height:1.55;margin-bottom:12px}
+.reveal-hint{font-size:12px;color:var(--accent);background:none;border:none;padding:0;font-family:inherit;cursor:pointer;font-weight:500}
+.defbox{margin-top:14px;padding:14px;background:var(--bg-soft);border-radius:var(--radius-md);font-size:13.5px;color:var(--text-primary);line-height:1.75;display:none}
+.defbox.open{display:block;animation:slideDown .25s ease}
+@keyframes slideDown{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.defbox code{font-family:var(--font-mono);font-size:12.5px;background:var(--bg-card);padding:1px 6px;border-radius:4px;border:1px solid var(--border)}
+.defbox strong{font-weight:600;color:var(--text-primary)}
+.analogy{margin-top:10px;font-style:italic;color:var(--text-secondary);border-left:2px solid var(--accent);padding:2px 0 2px 12px;font-size:13px}
+.example{margin-top:10px;padding:10px 12px;background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--border);font-family:var(--font-mono);font-size:12px;line-height:1.7;color:var(--text-primary);overflow-x:auto;white-space:pre}
+
+.demo{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:3rem}
+.demo-hd{padding:.9rem 1.4rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;justify-content:space-between}
+.demo-hd-l{display:flex;align-items:center;gap:10px}
+.dots{display:flex;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%}
+.dot-r{background:#F0997B}.dot-y{background:#EF9F27}.dot-g{background:#97C459}
+.demo-hd h3{font-size:14px;font-weight:600;color:var(--text-primary)}
+
+.anatomy{padding:2rem 1.4rem;background:var(--bg-soft)}
+.an-line{font-family:var(--font-mono);font-size:clamp(15px,3.5vw,20px);color:var(--text-primary);text-align:center;letter-spacing:.02em;margin-bottom:1.5rem;line-height:1.8;white-space:nowrap;overflow-x:auto;padding:.5rem 0}
+.an-tag{color:var(--html-fg);font-weight:500}
+.an-attr{color:var(--accent);font-weight:500}
+.an-val{color:var(--success);font-weight:500}
+.an-text{color:var(--text-primary)}
+.an-sel{color:var(--both-fg);font-weight:500}
+.an-prop{color:var(--html-fg);font-weight:500}
+.an-cssval{color:var(--success);font-weight:500}
+.an-labels{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;font-size:12px;color:var(--text-secondary)}
+.an-label{padding:10px 12px;background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.an-label b{display:block;font-weight:600;color:var(--text-primary);font-size:11.5px;margin-bottom:3px}
+.an-label .swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+
+.compare{display:grid;grid-template-columns:1fr 1fr}
+.cmp-code{padding:1.4rem;background:var(--bg-code);font-family:var(--font-mono);font-size:12.5px;line-height:1.9;border-right:1px solid var(--border);overflow-x:auto;white-space:pre;color:var(--text-primary)}
+.cmp-prev{padding:1.4rem;display:flex;align-items:center;justify-content:center;min-height:160px;background:#fff}
+.cmp-foot{font-size:11.5px;color:var(--text-secondary);padding:10px 1.4rem;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap}
+.cmp-foot span{display:flex;align-items:center;gap:6px}
+.cmp-foot .dotc{width:8px;height:8px;border-radius:2px}
+
+.box-model{padding:1.5rem 1.4rem;background:var(--bg-card)}
+.bm-ctrls{display:flex;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.bm-ctrl{flex:1;min-width:140px}
+.bm-ctrl label{font-size:12px;color:var(--text-secondary);display:flex;justify-content:space-between;margin-bottom:8px;font-weight:500}
+.bm-ctrl label b{font-weight:600;color:var(--text-primary);font-variant-numeric:tabular-nums}
+.bm-ctrl input[type=range]{width:100%;accent-color:var(--accent)}
+.bm-visual{display:flex;align-items:center;justify-content:center;min-height:240px;background:var(--bg-soft);border-radius:var(--radius-md);padding:.5rem}
+.bm-margin{background:var(--warning-bg);border:1.5px dashed var(--warning-border);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:padding .2s}
+.bm-border{background:#FCE3DC;border:2px solid #B5421C;display:flex;align-items:center;justify-content:center;border-radius:5px}
+.bm-padding{background:var(--accent-soft);border:1.5px dashed #85B7EB;display:flex;align-items:center;justify-content:center;transition:padding .2s;border-radius:3px}
+.bm-content{background:var(--accent);color:#fff;font-size:13px;padding:10px 18px;border-radius:4px;white-space:nowrap;font-weight:500}
+.bm-legend{display:flex;gap:1.25rem;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px dashed var(--border)}
+.bm-li{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--text-secondary)}
+.bm-sw{width:14px;height:14px;border-radius:3px}
+
+.playground{padding:0}
+.pg-hd{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.4rem;border-bottom:1px solid var(--border)}
+.pg-hd-title{font-size:14px;font-weight:600;color:var(--text-primary)}
+.pg-actions{display:flex;gap:.5rem;align-items:center}
+.btn{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);padding:7px 14px;font-size:12.5px;font-family:inherit;font-weight:500;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--accent-dark)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn-ghost{background:transparent;color:var(--text-secondary);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--bg-soft);color:var(--text-primary)}
+.pg-tip{font-size:11.5px;color:var(--text-tertiary);padding:.6rem 1.4rem;background:var(--bg-soft);border-bottom:1px solid var(--border)}
+.pg-presets{display:flex;gap:.4rem;padding:.6rem 1.4rem;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.preset{background:var(--bg-soft);border:1px solid var(--border);color:var(--text-secondary);font-size:11.5px;padding:5px 11px;border-radius:20px;cursor:pointer;font-family:inherit;transition:all .15s}
+.preset:hover{background:var(--bg-card);color:var(--text-primary);border-color:var(--accent)}
+.pg-eds{display:grid;grid-template-columns:1fr 1fr}
+.pg-ed{padding:1rem 1.4rem}
+.pg-ed + .pg-ed{border-left:1px solid var(--border)}
+.ed-lbl{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px;color:var(--text-secondary)}
+.ed-lbl .lbl-dot{width:7px;height:7px;border-radius:50%}
+.pg-ta{width:100%;font-family:var(--font-mono);font-size:12.5px;line-height:1.7;background:var(--bg-code);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;color:var(--text-primary);resize:vertical;min-height:170px;outline:none;tab-size:2}
+.pg-ta:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.pg-prev{padding:1rem 1.4rem;border-top:1px solid var(--border)}
+.pg-prev-lbl{font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.frame-wrap{background:#fff;border-radius:var(--radius-sm);border:1px solid var(--border);overflow:hidden}
+.pg-frame{width:100%;border:none;display:block;height:180px}
+
+.qbox{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.75rem}
+.quiz-q{font-size:16px;font-weight:600;color:var(--text-primary);margin-bottom:1.25rem;line-height:1.45}
+.quiz-q code{font-family:var(--font-mono);font-size:14px;background:var(--bg-soft);padding:2px 7px;border-radius:4px;font-weight:500}
 .quiz-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem}
-.qopt{background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 14px;font-size:13px;color:var(--color-text-primary);cursor:pointer;text-align:left;font-family:var(--font-sans);transition:background .15s}
-.qopt:hover{border-color:var(--color-border-secondary)}
-.qopt.correct{background:#E1F5EE;border-color:#0F6E56;color:#085041}
-.qopt.wrong{background:#FAECE7;border-color:#993C1D;color:#712B13}
-.qfb{font-size:13px;line-height:1.6;padding:10px 14px;border-radius:var(--border-radius-md);display:none}
+.qopt{background:var(--bg-soft);border:1.5px solid transparent;border-radius:var(--radius-sm);padding:12px 14px;font-size:13.5px;color:var(--text-primary);cursor:pointer;text-align:left;font-family:inherit;transition:background .15s,border-color .15s;display:flex;align-items:center;gap:12px;width:100%}
+.qopt:hover:not(:disabled){background:var(--bg-card);border-color:var(--border-strong)}
+.qopt:disabled{cursor:default}
+.qopt .q-letter{width:24px;height:24px;border-radius:50%;background:var(--bg-card);border:1px solid var(--border);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text-secondary);flex-shrink:0}
+.qopt .q-content{flex:1}
+.qopt code{font-family:var(--font-mono);font-size:12.5px;background:var(--bg-card);padding:1px 6px;border-radius:4px;border:1px solid var(--border)}
+.qopt.correct{background:var(--success-soft);border-color:var(--success);color:#085041}
+.qopt.correct .q-letter{background:var(--success);color:#fff;border-color:var(--success)}
+.qopt.wrong{background:var(--error-soft);border-color:var(--error);color:#712B13}
+.qopt.wrong .q-letter{background:var(--error);color:#fff;border-color:var(--error)}
+.qfb{font-size:13.5px;line-height:1.6;padding:12px 16px;border-radius:var(--radius-sm);display:none;margin-bottom:14px}
 .qfb.show{display:block}
-.qfb.good{background:#E1F5EE;color:#085041}
-.qfb.bad{background:#FAECE7;color:#712B13}
-.qnav{display:flex;gap:8px;margin-top:12px;align-items:center}
-.qnav button{background:none;border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:7px 14px;font-size:13px;font-family:var(--font-sans);cursor:pointer;color:var(--color-text-primary)}
-.qnav button:hover{background:var(--color-background-secondary)}
-.qctr{font-size:12px;color:var(--color-text-secondary);margin-left:auto}
-.cl-wrap{padding:0 1rem;margin-bottom:2rem}
-.clbox{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
-.cl-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:1rem}
-.cl-items{display:flex;flex-direction:column;gap:8px}
-.cl-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--color-text-primary);padding:8px 10px;border-radius:var(--border-radius-md);cursor:pointer;user-select:none;transition:background .15s}
-.cl-item:hover{background:var(--color-background-secondary)}
-.cl-item.ticked{color:var(--color-text-secondary);text-decoration:line-through}
-.cl-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--color-border-secondary);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;transition:background .15s}
-.cl-item.ticked .cl-check{background:#0F6E56;border-color:#0F6E56;color:#fff}
-@media(max-width:560px){.dbody,.sand-eds{grid-template-columns:1fr}.dcode{border-right:none;border-bottom:.5px solid var(--color-border-tertiary)}}
+.qfb.good{background:var(--success-soft);color:#085041;border-left:3px solid var(--success)}
+.qfb.bad{background:var(--error-soft);color:#712B13;border-left:3px solid var(--error)}
+.qfb code{font-family:var(--font-mono);font-size:12.5px;background:rgba(0,0,0,.04);padding:1px 5px;border-radius:3px}
+.qnav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.qctr{font-size:12px;color:var(--text-secondary);margin-left:auto;font-variant-numeric:tabular-nums}
+.q-score{font-size:12px;color:var(--text-secondary);font-weight:500;background:var(--bg-soft);padding:4px 10px;border-radius:20px}
+
+.clbox{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem}
+.cl-title{font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.cl-reset{background:none;border:1px solid var(--border);color:var(--text-secondary);font-size:11.5px;padding:5px 11px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s}
+.cl-reset:hover{background:var(--bg-soft);color:var(--text-primary);border-color:var(--border-strong)}
+.cl-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px}
+.cl-item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--text-primary);padding:8px 10px;border-radius:var(--radius-sm);cursor:pointer;user-select:none;transition:background .15s}
+.cl-item:hover{background:var(--bg-soft)}
+.cl-item.ticked{color:var(--text-tertiary);text-decoration:line-through}
+.cl-check{width:18px;height:18px;border-radius:5px;border:1.5px solid var(--border-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:11px;transition:all .15s;color:#fff}
+.cl-item.ticked .cl-check{background:var(--success);border-color:var(--success)}
+
+.next-steps{background:linear-gradient(135deg,#FDFCFA,#F2EFE7);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;margin-bottom:2rem}
+.next-steps h3{font-size:20px;font-weight:600;color:var(--text-primary);margin-bottom:8px;letter-spacing:-.01em}
+.next-steps p{font-size:14.5px;color:var(--text-secondary);margin-bottom:1.25rem;max-width:580px}
+.ns-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.ns-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px 16px;text-decoration:none;color:var(--text-primary);transition:border-color .15s,transform .15s;display:block}
+.ns-card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.ns-card b{display:block;font-size:13.5px;font-weight:600;margin-bottom:3px}
+.ns-card span{font-size:12px;color:var(--text-secondary);line-height:1.5;display:block}
+
+footer{text-align:center;font-size:12.5px;color:var(--text-tertiary);padding:2rem 1rem 1rem;border-top:1px solid var(--border);margin-top:2rem}
+footer a{color:var(--text-secondary);text-decoration:none}
+footer a:hover{color:var(--accent);text-decoration:underline}
+
+@media(max-width:640px){
+  .hero h1{font-size:28px}
+  .hero{padding:2rem 1rem 1.5rem}
+  .section-hd h2{font-size:20px}
+  .compare,.pg-eds{grid-template-columns:1fr}
+  .cmp-code{border-right:none;border-bottom:1px solid var(--border)}
+  .pg-ed + .pg-ed{border-left:none;border-top:1px solid var(--border)}
+  .roadmap{gap:.3rem}
+  .rm{font-size:11px;padding:5px 9px}
+  .topnav{display:none}
+  .qbox,.clbox,.next-steps{padding:1.25rem}
+  .an-line{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
 </style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to content</a>
 
-<div class="hero">
-  <div class="hero-badge">HTML & CSS — Beginner's Glossary</div>
-  <h1>Learn the words before you write the code</h1>
-  <p>Tap each card to unlock its full meaning. Try the live demos. Test yourself with the quiz. When you're done here, writing the assignment will feel natural.</p>
-  <div class="prog-wrap"><div class="prog-fill" id="pfill"></div></div>
-  <p class="prog-lbl" id="plbl">0 of 10 concepts unlocked</p>
-</div>
-
-<p class="sec-lbl">Core Concepts — tap any card to reveal</p>
-<div class="cards" id="cards-grid">
-
-<div class="kcard" id="c0" onclick="reveal(0)">
-  <span class="ktag thtml">HTML</span>
-  <h3>HTML</h3>
-  <p class="tagline">The skeleton of every webpage — labels content so the browser knows what to display.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d0">
-    HTML stands for <strong>HyperText Markup Language</strong>. It doesn't make things look beautiful — its job is to label what things <em>are</em>. "This is a heading." "This is a paragraph." "This is an image." The browser reads those labels and lays the page out accordingly. Without HTML, the browser would see nothing but raw unorganized text.
-    <div class="analogy">Think of HTML as the rooms of a house — living room, bedroom, kitchen. It defines what each space is for. CSS is the paint and furniture that makes each room look nice.</div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top"><span class="brand-mark">&lt;/&gt;</span><span>HTML &amp; CSS 101</span></a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#foundations">Foundations</a>
+      <a href="#content-elements">Content</a>
+      <a href="#naming">Naming</a>
+      <a href="#css">CSS</a>
+      <a href="#playground">Playground</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
   </div>
-</div>
+</header>
 
-<div class="kcard" id="c1" onclick="reveal(1)">
-  <span class="ktag tcss">CSS</span>
-  <h3>CSS</h3>
-  <p class="tagline">The stylist — makes your HTML beautiful with colors, fonts, and spacing.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d1">
-    CSS stands for <strong>Cascading Style Sheets</strong>. It is a completely separate file where you write rules like "make this text blue" or "give this card rounded corners." The word <em>cascading</em> means rules flow from general to specific — if all paragraphs are styled red but one specific paragraph is styled blue, the specific one always wins.
-    <div class="analogy">If HTML is the skeleton of the human body, CSS is the skin, clothes, hair, and accessories. The bones give structure; CSS gives appearance.</div>
+<main id="main">
+<section class="hero" id="top">
+  <span class="hero-badge">Beginner-friendly &middot; Interactive</span>
+  <h1>Learn the <em>words</em> before you write the code.</h1>
+  <p>An interactive glossary of every term you need to read, write, and understand HTML and CSS. Tap a card, try the demos, take the quiz &mdash; and by the end you&rsquo;ll be ready to build your first real page.</p>
+  <div class="prog-wrap" role="progressbar" aria-label="Concepts unlocked" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" id="prog"><div class="prog-fill" id="pfill"></div></div>
+  <p class="prog-lbl" id="plbl">0 of 20 concepts unlocked</p>
+</section>
+
+<nav class="roadmap" aria-label="Learning roadmap">
+  <a class="rm" href="#foundations"><span class="rm-num">1</span>HTML Foundations</a>
+  <a class="rm" href="#content-elements"><span class="rm-num">2</span>Content Elements</a>
+  <a class="rm" href="#naming"><span class="rm-num">3</span>Naming &amp; IDs</a>
+  <a class="rm" href="#css"><span class="rm-num">4</span>CSS Styling</a>
+</nav>
+
+<!-- ========== SECTION 1: HTML FOUNDATIONS ========== -->
+<section class="section" id="foundations">
+  <div class="section-hd">
+    <span class="sec-num">Section 1</span>
+    <h2>HTML Foundations</h2>
+    <p>The vocabulary every page is built from. Get these six words right and 80% of HTML stops looking mysterious.</p>
   </div>
-</div>
+  <div class="cards" id="cards-1"></div>
+</section>
 
-<div class="kcard" id="c2" onclick="reveal(2)">
-  <span class="ktag thtml">HTML</span>
-  <h3>Tag</h3>
-  <p class="tagline">A word in angle brackets that labels your content for the browser.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d2">
-    A <strong>tag</strong> is a keyword wrapped in angle brackets like <code>&lt;p&gt;</code> or <code>&lt;h1&gt;</code>. Most tags come in pairs — an <em>opening tag</em> and a <em>closing tag</em> that has a forward slash. Everything between the two tags is the content being labeled. The browser sees <code>&lt;h1&gt;Hello&lt;/h1&gt;</code> and knows to display "Hello" as a big heading.
-    <div class="analogy">Like sticky notes on moving boxes — "FRAGILE," "KITCHEN," "BOOKS." The tag labels the content inside so it is handled correctly.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c3" onclick="reveal(3)">
-  <span class="ktag thtml">HTML</span>
-  <h3>Element</h3>
-  <p class="tagline">The complete unit — opening tag + content + closing tag together.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d3">
-    An <strong>element</strong> is the full complete thing — the opening tag, the content inside, and the closing tag all together. So <code>&lt;p&gt;I love coding.&lt;/p&gt;</code> is a paragraph <em>element</em>. Tags by themselves are just labels. Elements are the whole package — the label plus what is being labeled.
-    <div class="analogy">A tag is like bread in a sandwich. The element is the complete sandwich — bread, filling, and everything together. The bread alone isn't the meal.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c4" onclick="reveal(4)">
-  <span class="ktag thtml">HTML</span>
-  <h3>Attribute</h3>
-  <p class="tagline">Extra information placed inside an opening tag to describe the element further.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d4">
-    An <strong>attribute</strong> gives an element extra details it needs to work properly. It lives inside the opening tag and follows the pattern <code>name="value"</code>. An image tag needs to know where the image file is — that is the <code>src</code> attribute. The <code>class</code> attribute gives an element a name so CSS can target and style it. Attributes never appear in the closing tag.
-    <div class="analogy">Like a name badge at a conference — it gives extra information about the person (name, company, role) without changing who they are fundamentally. The attribute is extra info about the element.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c5" onclick="reveal(5)">
-  <span class="ktag tboth">HTML + CSS</span>
-  <h3>Class</h3>
-  <p class="tagline">A nickname you give elements so CSS knows exactly which ones to style.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d5">
-    A <strong>class</strong> is a label you attach to an HTML element using <code>class="yourname"</code>. You invent the name yourself — it should describe what the element is. Then in your CSS file, you target that class using a dot followed by the name, like <code>.bio { color: gray; }</code>. Multiple elements can share the same class and they will all receive the same styles automatically.
-    <div class="analogy">Like a school uniform — every student in Year 3 wears the blue uniform. The class "Year3" is the label; every student with that label gets the same styling.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c6" onclick="reveal(6)">
-  <span class="ktag thtml">HTML</span>
-  <h3>&lt;div&gt;</h3>
-  <p class="tagline">An invisible box that groups elements together so you can style them as one unit.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d6">
-    A <code>&lt;div&gt;</code> is a container element with zero visual appearance on its own. It adds no text, no color, no border — nothing. But it is one of the most important tools in HTML because it lets you wrap related elements together into a group. You then give the div a class and style the entire group with CSS at once. Almost every card, section, and layout box you build will use a div.
-    <div class="analogy">Like a cardboard box when packing. The box itself is not the product — but it holds everything together so you can move and organize items as one unit.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c7" onclick="reveal(7)">
-  <span class="ktag tcss">CSS</span>
-  <h3>Selector</h3>
-  <p class="tagline">The part of a CSS rule that points to which element you want to style.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d7">
-    Before you write any CSS styling rules, you must tell the browser which element those rules apply to — that is the <strong>selector</strong>. Writing <code>.card { ... }</code> means "find every element with the class 'card' and apply these rules to it." A dot selects by class name. No dot selects by tag name — for example, <code>p { color: red; }</code> makes every paragraph red on the page.
-    <div class="analogy">Like addressing a letter. The selector is the name on the envelope. Without it, the styles have nowhere to go and nothing gets styled.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c8" onclick="reveal(8)">
-  <span class="ktag tcss">CSS</span>
-  <h3>Padding vs Margin</h3>
-  <p class="tagline">Both create space — but padding is inside the box and margin is outside it.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d8">
-    <strong>Padding</strong> is space <em>inside</em> a box, between the content and the edge of the box. Making padding bigger makes the box itself larger. <strong>Margin</strong> is space <em>outside</em> a box, pushing it away from other elements around it. Beginners mix these up constantly — the interactive demo below the cards will make it crystal clear.
-    <div class="analogy">Picture a framed photo on a wall. The gap between the photo and its frame is <strong>padding</strong>. The gap between the frame and the next frame on the wall is <strong>margin</strong>.</div>
-  </div>
-</div>
-
-<div class="kcard" id="c9" onclick="reveal(9)">
-  <span class="ktag tcss">CSS</span>
-  <h3>Hover Effect</h3>
-  <p class="tagline">CSS rules that activate only when a mouse moves over an element.</p>
-  <button class="reveal-hint">Tap to learn more →</button>
-  <div class="defbox" id="d9">
-    The <strong>:hover</strong> pseudo-class lets you write styles that only apply when a user's mouse is hovering over an element. You attach it directly to any selector: <code>.contact-btn:hover { background: darkblue; }</code>. Nothing happens when the user ignores the button — but the moment their cursor moves over it, CSS activates those rules. This makes interfaces feel interactive and responsive.
-    <div class="analogy">Like a touch lamp that glows only when your hand is near it. It is in a resting state normally, but it reacts the moment something comes close.</div>
-  </div>
-</div>
-
-</div>
-
-<div class="demo-wrap">
-  <p class="sec-lbl">Side-by-side — HTML code on the left, what the browser shows on the right</p>
-  <div class="dbox">
-    <div class="dhead">
-      <div class="ddot" style="background:#F0997B"></div>
-      <div class="ddot" style="background:#EF9F27"></div>
-      <div class="ddot" style="background:#97C459"></div>
-      <h3>Tags, elements, and classes in action</h3>
+<!-- Anatomy demo: HTML element -->
+<section class="demo" aria-label="Anatomy of an HTML element">
+  <div class="demo-hd">
+    <div class="demo-hd-l">
+      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+      <h3>Anatomy of an HTML element</h3>
     </div>
-    <div class="dbody">
-      <div class="dcode">
-<span class="ht">&lt;h1</span> <span class="ha">class=</span><span class="hv">"name"</span><span class="ht">&gt;</span><span class="hx">MCI</span><span class="ht">&lt;/h1&gt;</span>
-<br>
-<span class="ht">&lt;p</span> <span class="ha">class=</span><span class="hv">"dept"</span><span class="ht">&gt;</span>
-<span class="hx">  Computer Science</span>
-<span class="ht">&lt;/p&gt;</span>
-<br>
-<span class="ht">&lt;p</span> <span class="ha">class=</span><span class="hv">"bio"</span><span class="ht">&gt;</span>
-<span class="hx">  I love technology.</span>
-<span class="ht">&lt;/p&gt;</span>
-<br>
-<span class="ht">&lt;button</span> <span class="ha">class=</span><span class="hv">"btn"</span><span class="ht">&gt;</span>
-<span class="hx">  Contact Me</span>
-<span class="ht">&lt;/button&gt;</span>
-      </div>
-      <div class="dpreview">
-        <div>
-          <div style="font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px">MCI</div>
-          <div style="font-size:12px;color:#185FA5;font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Computer Science</div>
-          <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:12px">I love technology.</div>
-          <button style="background:#185FA5;color:#fff;border:none;border-radius:6px;padding:8px 16px;font-size:13px;cursor:pointer">Contact Me</button>
-        </div>
+  </div>
+  <div class="anatomy">
+    <div class="an-line">
+      <span class="an-tag">&lt;a</span> <span class="an-attr">href</span>=<span class="an-val">"about.html"</span><span class="an-tag">&gt;</span><span class="an-text">Read more</span><span class="an-tag">&lt;/a&gt;</span>
+    </div>
+    <div class="an-labels">
+      <div class="an-label"><b><span class="swatch" style="background:#712B13"></span>Opening tag</b><span class="an-tag" style="font-family:var(--font-mono)">&lt;a&gt;</span> &mdash; tells the browser an anchor (link) starts here</div>
+      <div class="an-label"><b><span class="swatch" style="background:#185FA5"></span>Attribute</b><span class="an-attr" style="font-family:var(--font-mono)">href</span> &mdash; extra info this element needs</div>
+      <div class="an-label"><b><span class="swatch" style="background:#0F6E56"></span>Value</b><span class="an-val" style="font-family:var(--font-mono)">"about.html"</span> &mdash; where the link goes</div>
+      <div class="an-label"><b><span class="swatch" style="background:#1F1E1B"></span>Content</b>The text shown to the user</div>
+      <div class="an-label"><b><span class="swatch" style="background:#712B13"></span>Closing tag</b><span class="an-tag" style="font-family:var(--font-mono)">&lt;/a&gt;</span> &mdash; the slash signals the element ends</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 2: CONTENT ELEMENTS ========== -->
+<section class="section" id="content-elements">
+  <div class="section-hd">
+    <span class="sec-num">Section 2</span>
+    <h2>Content Elements</h2>
+    <p>The actual tags you&rsquo;ll write all day &mdash; the ones that put words, links, pictures and structure on the page.</p>
+  </div>
+  <div class="cards" id="cards-2"></div>
+</section>
+
+<!-- Side-by-side demo -->
+<section class="demo" aria-label="Code-to-preview comparison">
+  <div class="demo-hd">
+    <div class="demo-hd-l">
+      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+      <h3>Code &rarr; what the browser shows</h3>
+    </div>
+  </div>
+  <div class="compare">
+    <div class="cmp-code"><span class="an-tag">&lt;h1&gt;</span>About Me<span class="an-tag">&lt;/h1&gt;</span>
+
+<span class="an-tag">&lt;p&gt;</span>I&rsquo;m a beginner learning
+HTML and CSS.<span class="an-tag">&lt;/p&gt;</span>
+
+<span class="an-tag">&lt;ul&gt;</span>
+  <span class="an-tag">&lt;li&gt;</span>I love coffee<span class="an-tag">&lt;/li&gt;</span>
+  <span class="an-tag">&lt;li&gt;</span>I read at night<span class="an-tag">&lt;/li&gt;</span>
+<span class="an-tag">&lt;/ul&gt;</span>
+
+<span class="an-tag">&lt;a</span> <span class="an-attr">href</span>=<span class="an-val">"#"</span><span class="an-tag">&gt;</span>My portfolio<span class="an-tag">&lt;/a&gt;</span></div>
+    <div class="cmp-prev">
+      <div style="text-align:left;font-family:Georgia,serif">
+        <h1 style="font-size:24px;margin:0 0 10px;color:#1F1E1B;font-weight:600">About Me</h1>
+        <p style="font-size:14px;color:#5C5852;margin:0 0 12px;line-height:1.5">I&rsquo;m a beginner learning HTML and CSS.</p>
+        <ul style="font-size:14px;color:#5C5852;margin:0 0 12px;padding-left:20px;line-height:1.6">
+          <li>I love coffee</li>
+          <li>I read at night</li>
+        </ul>
+        <a href="#" style="font-size:14px;color:#185FA5;text-decoration:underline">My portfolio</a>
       </div>
     </div>
-    <div class="dlabel">
-      <span style="color:#993C1D">Orange = tags</span>
-      <span style="color:#185FA5">Blue = attributes</span>
-      <span style="color:#3B6D11">Green = values</span>
-      <span>The browser renders the result on the right →</span>
+  </div>
+  <div class="cmp-foot">
+    <span><span class="dotc" style="background:#712B13"></span>Tags</span>
+    <span><span class="dotc" style="background:#185FA5"></span>Attributes</span>
+    <span><span class="dotc" style="background:#0F6E56"></span>Values</span>
+    <span style="color:var(--text-tertiary)">&mdash; the browser renders the result on the right</span>
+  </div>
+</section>
+
+<!-- ========== SECTION 3: NAMING & TARGETING ========== -->
+<section class="section" id="naming">
+  <div class="section-hd">
+    <span class="sec-num">Section 3</span>
+    <h2>Naming &amp; IDs</h2>
+    <p>How you label elements so CSS (and JavaScript) can find them later. Master this and styling becomes a calm, surgical process.</p>
+  </div>
+  <div class="cards" id="cards-3"></div>
+</section>
+
+<!-- ========== SECTION 4: CSS STYLING ========== -->
+<section class="section" id="css">
+  <div class="section-hd">
+    <span class="sec-num">Section 4</span>
+    <h2>CSS Styling</h2>
+    <p>Now that the structure makes sense, here&rsquo;s how you make it look good &mdash; the rules, the box, the colors, the polish.</p>
+  </div>
+  <div class="cards" id="cards-4"></div>
+</section>
+
+<!-- Anatomy demo: CSS rule -->
+<section class="demo" aria-label="Anatomy of a CSS rule">
+  <div class="demo-hd">
+    <div class="demo-hd-l">
+      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+      <h3>Anatomy of a CSS rule</h3>
     </div>
   </div>
-</div>
-
-<div class="pm-wrap">
-  <p class="sec-lbl">Interactive — drag the sliders to see padding vs margin</p>
-  <div class="pmbox">
-    <div class="pm-ctrls">
-      <div class="pm-ctrl">
-        <label>Padding (space inside) <b id="pval">20px</b></label>
-        <input type="range" min="4" max="50" value="20" step="2" oninput="updPM()" id="pslide">
-      </div>
-      <div class="pm-ctrl">
-        <label>Margin (space outside) <b id="mval">20px</b></label>
-        <input type="range" min="4" max="50" value="20" step="2" oninput="updPM()" id="mslide">
-      </div>
+  <div class="anatomy">
+    <div class="an-line">
+      <span class="an-sel">.button</span> { <span class="an-prop">color</span>: <span class="an-cssval">white</span>; <span class="an-prop">background</span>: <span class="an-cssval">#185FA5</span>; }
     </div>
-    <div class="pm-visual">
-      <div class="pm-margin" id="pmm"><div class="pm-padding" id="pmp"><div class="pm-content">Content</div></div></div>
-    </div>
-    <div class="pm-leg">
-      <div class="pm-li"><div class="pm-sw" style="background:#FAEEDA;border:1.5px dashed #EF9F27"></div> Margin (amber zone — outside)</div>
-      <div class="pm-li"><div class="pm-sw" style="background:#E6F1FB;border:1.5px dashed #85B7EB"></div> Padding (blue zone — inside)</div>
-      <div class="pm-li"><div class="pm-sw" style="background:#185FA5"></div> Content</div>
+    <div class="an-labels">
+      <div class="an-label"><b><span class="swatch" style="background:#3C3489"></span>Selector</b><span style="font-family:var(--font-mono)">.button</span> &mdash; which elements to style</div>
+      <div class="an-label"><b><span class="swatch" style="background:#712B13"></span>Property</b><span style="font-family:var(--font-mono)">color</span>, <span style="font-family:var(--font-mono)">background</span> &mdash; what to change</div>
+      <div class="an-label"><b><span class="swatch" style="background:#0F6E56"></span>Value</b><span style="font-family:var(--font-mono)">white</span>, <span style="font-family:var(--font-mono)">#185FA5</span> &mdash; what to change it to</div>
+      <div class="an-label"><b>Declaration</b>One <span style="font-family:var(--font-mono)">property: value;</span> pair. End each with a semicolon.</div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="sand-wrap">
-  <p class="sec-lbl">Live playground — type your own HTML and CSS and watch it render</p>
-  <div class="sandbox">
-    <div class="sand-hdr">
-      <span>Edit the code — preview updates as you type</span>
-      <button class="run-btn" onclick="runSand()">Run ▶</button>
-    </div>
-    <div class="sand-eds">
-      <div class="sand-ed" style="border-right:.5px solid var(--color-border-tertiary)">
-        <div class="ed-lbl" style="color:#993C1D">HTML</div>
-        <textarea class="sand-ta" id="shtml" spellcheck="false">&lt;div class="card"&gt;
-  &lt;h2 class="name"&gt;My Name&lt;/h2&gt;
-  &lt;p class="bio"&gt;Student | Coder&lt;/p&gt;
-  &lt;button class="btn"&gt;Contact Me&lt;/button&gt;
-&lt;/div&gt;</textarea>
-      </div>
-      <div class="sand-ed">
-        <div class="ed-lbl" style="color:#185FA5">CSS</div>
-        <textarea class="sand-ta" id="scss" spellcheck="false">.card {
-  background: #f0f4ff;
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-}
-.name { color: #185FA5; }
-.bio { color: #555; margin: 8px 0; }
-.btn {
-  background: #185FA5;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.btn:hover { background: #0C447C; }</textarea>
-      </div>
-    </div>
-    <div class="sand-prev">
-      <div class="prev-lbl">Preview</div>
-      <div class="iframe-wrap"><iframe id="sframe" class="sand-frame"></iframe></div>
+<!-- Box model interactive -->
+<section class="demo" aria-label="Box model playground">
+  <div class="demo-hd">
+    <div class="demo-hd-l">
+      <div class="dots"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+      <h3>Interactive box model &mdash; drag the sliders</h3>
     </div>
   </div>
-</div>
+  <div class="box-model">
+    <div class="bm-ctrls">
+      <div class="bm-ctrl">
+        <label>Margin <span style="color:var(--text-tertiary);font-weight:400">(outside)</span> <b id="m-val">24px</b></label>
+        <input type="range" min="0" max="60" value="24" step="2" id="m-slide" aria-label="Margin">
+      </div>
+      <div class="bm-ctrl">
+        <label>Border <span style="color:var(--text-tertiary);font-weight:400">(the edge)</span> <b id="b-val">2px</b></label>
+        <input type="range" min="0" max="20" value="2" step="1" id="b-slide" aria-label="Border">
+      </div>
+      <div class="bm-ctrl">
+        <label>Padding <span style="color:var(--text-tertiary);font-weight:400">(inside)</span> <b id="p-val">18px</b></label>
+        <input type="range" min="0" max="60" value="18" step="2" id="p-slide" aria-label="Padding">
+      </div>
+    </div>
+    <div class="bm-visual">
+      <div class="bm-margin" id="bm-m"><div class="bm-border" id="bm-b"><div class="bm-padding" id="bm-p"><div class="bm-content">Content</div></div></div></div>
+    </div>
+    <div class="bm-legend">
+      <div class="bm-li"><div class="bm-sw" style="background:var(--warning-bg);border:1.5px dashed var(--warning-border)"></div>Margin (outside the box)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:#FCE3DC;border:1.5px solid #B5421C"></div>Border (the edge)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:var(--accent-soft);border:1.5px dashed #85B7EB"></div>Padding (inside the box)</div>
+      <div class="bm-li"><div class="bm-sw" style="background:var(--accent)"></div>Content</div>
+    </div>
+  </div>
+</section>
 
-<div class="quiz-wrap">
-  <p class="sec-lbl">Quick quiz — test what you have learned</p>
+<!-- Live playground -->
+<section class="demo playground" id="playground" aria-label="Live HTML and CSS playground">
+  <div class="pg-hd">
+    <span class="pg-hd-title">Live playground</span>
+    <div class="pg-actions">
+      <button class="btn btn-ghost" onclick="resetPG()" type="button">Reset</button>
+      <button class="btn" onclick="runPG()" type="button">Run &#9654;</button>
+    </div>
+  </div>
+  <div class="pg-tip">Type HTML on the left, CSS on the right. The preview updates as you type.</div>
+  <div class="pg-presets" id="pg-presets">
+    <button class="preset" data-preset="card" type="button">Profile card</button>
+    <button class="preset" data-preset="list" type="button">Styled list</button>
+    <button class="preset" data-preset="hero" type="button">Hero section</button>
+    <button class="preset" data-preset="form" type="button">Contact form</button>
+  </div>
+  <div class="pg-eds">
+    <div class="pg-ed">
+      <div class="ed-lbl"><span class="lbl-dot" style="background:#712B13"></span>HTML</div>
+      <textarea class="pg-ta" id="pg-html" spellcheck="false"></textarea>
+    </div>
+    <div class="pg-ed">
+      <div class="ed-lbl"><span class="lbl-dot" style="background:#185FA5"></span>CSS</div>
+      <textarea class="pg-ta" id="pg-css" spellcheck="false"></textarea>
+    </div>
+  </div>
+  <div class="pg-prev">
+    <div class="pg-prev-lbl">Preview</div>
+    <div class="frame-wrap"><iframe id="pg-frame" class="pg-frame" title="Live preview"></iframe></div>
+  </div>
+</section>
+
+<!-- Quiz -->
+<section class="section" id="quiz">
+  <div class="section-hd">
+    <span class="sec-num">Test yourself</span>
+    <h2>Quick quiz</h2>
+    <p>Twelve questions across everything above. No login, no streaks &mdash; just check what stuck.</p>
+  </div>
   <div class="qbox">
-    <div class="quiz-q" id="qq">Loading...</div>
+    <div class="quiz-q" id="qq">Loading&hellip;</div>
     <div class="quiz-opts" id="qopts"></div>
     <div class="qfb" id="qfb"></div>
     <div class="qnav">
-      <button onclick="nextQ()">Next question →</button>
-      <span class="qctr" id="qctr">1 / 6</span>
+      <button class="btn btn-ghost" onclick="prevQ()" id="qprev" type="button">&larr; Previous</button>
+      <button class="btn" onclick="nextQ()" type="button">Next &rarr;</button>
+      <span class="q-score" id="qscore">Score: 0</span>
+      <span class="qctr" id="qctr">1 / 12</span>
     </div>
   </div>
-</div>
+</section>
 
-<div class="cl-wrap">
-  <p class="sec-lbl">Your progress — tick off each concept you understand</p>
+<!-- Progress checklist -->
+<section class="section" id="checklist">
+  <div class="section-hd">
+    <span class="sec-num">Your progress</span>
+    <h2>Concepts I understand</h2>
+    <p>Tick a concept once it genuinely clicks. Be honest with yourself &mdash; this list is just for you.</p>
+  </div>
   <div class="clbox">
-    <div class="cl-title">Concepts I understand</div>
+    <div class="cl-title">
+      <span>Tick what you know</span>
+      <button class="cl-reset" onclick="resetCL()" type="button">Reset all</button>
+    </div>
     <div class="cl-items" id="clitems"></div>
   </div>
-</div>
+</section>
+
+<!-- Next steps -->
+<section class="next-steps">
+  <h3>What to do next</h3>
+  <p>You now know the vocabulary. The fastest way to make it stick is to build something tiny &mdash; an &ldquo;About me&rdquo; page, a recipe card, a profile. Then come back and read these:</p>
+  <div class="ns-grid">
+    <a class="ns-card" href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener"><b>MDN: Learn Web Development &rarr;</b><span>The free, authoritative beginner curriculum from Mozilla.</span></a>
+    <a class="ns-card" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements" target="_blank" rel="noopener"><b>MDN: HTML Element Reference &rarr;</b><span>Every HTML tag, what it does, and when to use it.</span></a>
+    <a class="ns-card" href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference" target="_blank" rel="noopener"><b>MDN: CSS Reference &rarr;</b><span>Every CSS property looked up alphabetically.</span></a>
+    <a class="ns-card" href="https://web.dev/learn/html" target="_blank" rel="noopener"><b>web.dev: Learn HTML &rarr;</b><span>Google&rsquo;s short, modern HTML course.</span></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>HTML &amp; CSS 101 &middot; Built as an interactive glossary for absolute beginners.</p>
+  <p style="margin-top:6px">References: <a href="https://developer.mozilla.org/" target="_blank" rel="noopener">MDN Web Docs</a> &middot; <a href="https://web.dev/" target="_blank" rel="noopener">web.dev</a></p>
+</footer>
 
 <script>
-const concepts=["HTML","CSS","Tag","Element","Attribute","Class","<div>","Selector","Padding vs Margin","Hover Effect"];
-let unlocked=0,ticked=new Set();
+/* ============================================================
+   CONCEPT DATA
+   ============================================================ */
+const CONCEPTS=[
+  // Section 1: HTML Foundations
+  {s:1,tag:'HTML',title:'HTML',code:false,
+    tagline:'The skeleton of every webpage &mdash; labels content so the browser knows what to display.',
+    body:'HTML stands for <strong>HyperText Markup Language</strong>. Its job isn&rsquo;t to make things look pretty &mdash; it&rsquo;s to <em>label</em> what things are. &ldquo;This is a heading.&rdquo; &ldquo;This is a paragraph.&rdquo; &ldquo;This is an image.&rdquo; The browser reads those labels and lays the page out accordingly.',
+    analogy:'HTML is the rooms of a house &mdash; living room, bedroom, kitchen. It defines what each space is <em>for</em>. CSS is the paint and furniture.'},
+  {s:1,tag:'HTML',title:'Document Structure',code:false,
+    tagline:'Every HTML file follows the same skeleton: doctype, html, head, body.',
+    body:'A complete page always starts with <code>&lt;!DOCTYPE html&gt;</code> (tells the browser this is modern HTML), then an <code>&lt;html&gt;</code> wrapper that holds two children: <code>&lt;head&gt;</code> for invisible info (title, character encoding, links to stylesheets) and <code>&lt;body&gt;</code> for everything the visitor sees.',
+    analogy:'Like an envelope. The <code>&lt;head&gt;</code> is the address and stamps the post office reads. The <code>&lt;body&gt;</code> is the letter inside that the recipient actually reads.',
+    example:'&lt;!DOCTYPE html&gt;\n&lt;html lang="en"&gt;\n  &lt;head&gt;\n    &lt;title&gt;My Page&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Hello!&lt;/h1&gt;\n  &lt;/body&gt;\n&lt;/html&gt;'},
+  {s:1,tag:'HTML',title:'Tag',code:false,
+    tagline:'A word in angle brackets that labels your content for the browser.',
+    body:'A <strong>tag</strong> is a keyword wrapped in angle brackets like <code>&lt;p&gt;</code> or <code>&lt;h1&gt;</code>. Most tags come in pairs &mdash; an <em>opening tag</em> and a <em>closing tag</em> with a forward slash. Everything between them is what&rsquo;s being labeled.',
+    analogy:'Like sticky notes on moving boxes: &ldquo;FRAGILE,&rdquo; &ldquo;KITCHEN,&rdquo; &ldquo;BOOKS.&rdquo; The tag labels the content inside so it&rsquo;s handled correctly.'},
+  {s:1,tag:'HTML',title:'Element',code:false,
+    tagline:'The complete unit &mdash; opening tag + content + closing tag together.',
+    body:'An <strong>element</strong> is the full package &mdash; opening tag, the content, and closing tag all together. So <code>&lt;p&gt;I love coding.&lt;/p&gt;</code> is a paragraph <em>element</em>. Tags by themselves are just labels; elements are the whole thing being labeled.',
+    analogy:'A tag is bread. The element is the complete sandwich &mdash; bread, filling, and everything together. The bread alone isn&rsquo;t the meal.'},
+  {s:1,tag:'HTML',title:'Attribute',code:false,
+    tagline:'Extra information inside an opening tag that describes the element further.',
+    body:'An <strong>attribute</strong> gives an element extra details it needs to work. It lives inside the opening tag and follows the pattern <code>name="value"</code>. An image needs to know <em>where</em> the image file is &mdash; that&rsquo;s the <code>src</code> attribute. The <code>class</code> attribute gives an element a name so CSS can target it. Attributes never appear in the closing tag.',
+    analogy:'Like a name badge at a conference. It gives extra info (name, company, role) without changing who the person is.'},
+  {s:1,tag:'HTML',title:'Comment',code:true,codeStr:'&lt;!-- --&gt;',
+    tagline:'A note for yourself that the browser ignores completely.',
+    body:'Anything between <code>&lt;!--</code> and <code>--&gt;</code> is invisible to the user &mdash; the browser skips over it. Use comments to leave reminders, label sections, or temporarily hide code while you experiment.',
+    analogy:'Like writing notes in the margin of a textbook. Only you see them; they don&rsquo;t change the story.',
+    example:'&lt;!-- Main navigation starts here --&gt;\n&lt;nav&gt;\n  ...\n&lt;/nav&gt;'},
 
+  // Section 2: Content Elements
+  {s:2,tag:'HTML',title:'Heading',code:true,codeStr:'&lt;h1&gt;&hellip;&lt;h6&gt;',
+    tagline:'Six levels of titles, from biggest (h1) to smallest (h6).',
+    body:'Headings give your page hierarchy. <code>&lt;h1&gt;</code> is the main title of the page &mdash; usually only one per page. <code>&lt;h2&gt;</code> marks major sections, <code>&lt;h3&gt;</code> is a sub-section, and so on down to <code>&lt;h6&gt;</code>. Search engines and screen readers rely on this hierarchy, so don&rsquo;t skip levels just to get a certain size.',
+    analogy:'Like the table of contents in a book. Chapters (h1), sections (h2), sub-sections (h3) &mdash; each level nested inside the one above.',
+    example:'&lt;h1&gt;My Recipe Blog&lt;/h1&gt;\n&lt;h2&gt;Desserts&lt;/h2&gt;\n&lt;h3&gt;Chocolate cake&lt;/h3&gt;'},
+  {s:2,tag:'HTML',title:'Paragraph',code:true,codeStr:'&lt;p&gt;',
+    tagline:'A block of regular text. The most common element on the web.',
+    body:'The <code>&lt;p&gt;</code> element wraps a paragraph of text. Browsers automatically add space above and below each paragraph so they don&rsquo;t run together. Don&rsquo;t use <code>&lt;br&gt;</code> tags to separate paragraphs &mdash; let <code>&lt;p&gt;</code> do its job.',
+    analogy:'Each <code>&lt;p&gt;</code> is one paragraph in a book &mdash; a self-contained thought with breathing room above and below.',
+    example:'&lt;p&gt;Welcome to my site.&lt;/p&gt;\n&lt;p&gt;I write about coffee and code.&lt;/p&gt;'},
+  {s:2,tag:'HTML',title:'Link',code:true,codeStr:'&lt;a href&gt;',
+    tagline:'The thing that makes the web a web &mdash; click and you go somewhere new.',
+    body:'A link is the <code>&lt;a&gt;</code> element (short for &ldquo;anchor&rdquo;). The <code>href</code> attribute holds the destination &mdash; another page, a different website, or even a section of the current page. Whatever text sits between the opening and closing tags becomes clickable.',
+    analogy:'Like a road sign. The arrow on the sign points somewhere; clicking the link takes you there.',
+    example:'&lt;a href="https://mdn.io"&gt;MDN docs&lt;/a&gt;\n&lt;a href="about.html"&gt;About me&lt;/a&gt;\n&lt;a href="#contact"&gt;Jump to contact&lt;/a&gt;'},
+  {s:2,tag:'HTML',title:'Image',code:true,codeStr:'&lt;img&gt;',
+    tagline:'Embed a picture. No closing tag &mdash; just src and alt.',
+    body:'The <code>&lt;img&gt;</code> tag is special: it has <em>no closing tag</em> because there&rsquo;s no text inside it (called a &ldquo;void element&rdquo;). The <code>src</code> attribute is the path to the image file. The <code>alt</code> attribute is a text description &mdash; essential for screen readers and shown if the image fails to load. <strong>Always include alt.</strong>',
+    analogy:'A photo in a picture frame. The <code>src</code> is which photo. The <code>alt</code> is the caption that gets read out when the photo can&rsquo;t be seen.',
+    example:'&lt;img src="cat.jpg" alt="My orange cat napping"&gt;'},
+  {s:2,tag:'HTML',title:'List',code:true,codeStr:'&lt;ul&gt; &lt;ol&gt; &lt;li&gt;',
+    tagline:'Bulleted (ul) or numbered (ol) lists, each item wrapped in li.',
+    body:'<code>&lt;ul&gt;</code> creates an <strong>unordered</strong> list (bullets). <code>&lt;ol&gt;</code> creates an <strong>ordered</strong> list (numbers). Inside either one, each entry is a <code>&lt;li&gt;</code> (list item). Use ordered when sequence matters (recipe steps); unordered when it doesn&rsquo;t (favorite movies).',
+    analogy:'A shopping list with bullets is <code>&lt;ul&gt;</code>. Step-by-step assembly instructions are <code>&lt;ol&gt;</code>.',
+    example:'&lt;ol&gt;\n  &lt;li&gt;Crack eggs&lt;/li&gt;\n  &lt;li&gt;Whisk&lt;/li&gt;\n  &lt;li&gt;Cook&lt;/li&gt;\n&lt;/ol&gt;'},
+  {s:2,tag:'HTML',title:'Div',code:true,codeStr:'&lt;div&gt;',
+    tagline:'An invisible box that groups elements so you can style them as one.',
+    body:'A <code>&lt;div&gt;</code> has zero visual appearance on its own &mdash; no color, no border, nothing. But it&rsquo;s essential because it lets you wrap related elements into a group, give that group a class, and style the whole thing as one unit. Almost every card, section, and layout box you build will use a div.',
+    analogy:'A cardboard box when packing. The box isn&rsquo;t the product &mdash; but it holds everything together so you can move and organize items as one.',
+    example:'&lt;div class="card"&gt;\n  &lt;h3&gt;Title&lt;/h3&gt;\n  &lt;p&gt;Description&hellip;&lt;/p&gt;\n&lt;/div&gt;'},
+  {s:2,tag:'HTML',title:'Semantic Tags',code:false,
+    tagline:'Tags that say what their content means: header, nav, main, footer.',
+    body:'Instead of wrapping everything in <code>&lt;div&gt;</code>s, HTML gives you tags that describe <em>meaning</em>: <code>&lt;header&gt;</code> for the top, <code>&lt;nav&gt;</code> for menus, <code>&lt;main&gt;</code> for the primary content, <code>&lt;section&gt;</code> for chunks, <code>&lt;article&gt;</code> for self-contained posts, <code>&lt;footer&gt;</code> for the bottom. These help screen readers, search engines, and your future self.',
+    analogy:'Compare &ldquo;the thing at the top of the page&rdquo; to &ldquo;<code>&lt;header&gt;</code>&rdquo;. Same box &mdash; but now it has a name everyone agrees on.',
+    example:'&lt;header&gt;&hellip;&lt;/header&gt;\n&lt;nav&gt;&hellip;&lt;/nav&gt;\n&lt;main&gt;\n  &lt;article&gt;&hellip;&lt;/article&gt;\n&lt;/main&gt;\n&lt;footer&gt;&hellip;&lt;/footer&gt;'},
+
+  // Section 3: Naming
+  {s:3,tag:'BOTH',title:'Class',code:false,
+    tagline:'A nickname you give elements so CSS knows which ones to style.',
+    body:'A <strong>class</strong> is a label you attach with <code>class="yourname"</code>. You invent the name &mdash; it should describe what the element <em>is</em> (<code>card</code>, <code>btn-primary</code>). In CSS you target it with a dot followed by the name. Multiple elements can share the same class and all get the same styles automatically.',
+    analogy:'Like a school uniform. Every student in Year 3 wears blue. The class &ldquo;Year3&rdquo; is the label; everyone with that label gets the same styling.',
+    example:'HTML: &lt;p class="bio"&gt;&hellip;&lt;/p&gt;\nCSS:  .bio { color: gray; }'},
+  {s:3,tag:'BOTH',title:'ID',code:false,
+    tagline:'Like a class, but unique &mdash; only one element on the page can have it.',
+    body:'An <strong>ID</strong> is set with <code>id="yourname"</code> and targeted in CSS using <code>#</code> (a hash). The big difference from class: an ID must be <em>unique</em> &mdash; one ID, one element. Use IDs for things like the page header, a specific signup form, or a link target (<code>&lt;a href="#contact"&gt;</code> jumps to the element with <code>id="contact"</code>). For styling, prefer classes &mdash; they&rsquo;re reusable.',
+    analogy:'A class is your job title (many people share it). An ID is your social security number (only you have it).',
+    example:'HTML: &lt;header id="top"&gt;&hellip;&lt;/header&gt;\nCSS:  #top { background: navy; }'},
+
+  // Section 4: CSS
+  {s:4,tag:'CSS',title:'CSS',code:false,
+    tagline:'The stylist &mdash; turns plain HTML into something worth looking at.',
+    body:'CSS stands for <strong>Cascading Style Sheets</strong>. It&rsquo;s where you write rules like &ldquo;make this text blue&rdquo; or &ldquo;give this card rounded corners.&rdquo; The word <em>cascading</em> means rules flow from general to specific &mdash; if all paragraphs are styled red but one specific paragraph is styled blue, the specific one wins.',
+    analogy:'If HTML is the skeleton, CSS is the skin, clothes, hair and accessories. Bones give structure; CSS gives appearance.'},
+  {s:4,tag:'CSS',title:'Selector',code:false,
+    tagline:'The part of a CSS rule that points to which elements you want to style.',
+    body:'Before any styling rules apply, you tell the browser <em>which</em> elements they apply to &mdash; that&rsquo;s the <strong>selector</strong>. <code>.card { &hellip; }</code> means &ldquo;find every element with class &lsquo;card&rsquo;&rdquo;. <code>#top</code> targets a specific ID. A bare tag name like <code>p</code> targets every paragraph on the page.',
+    analogy:'Like addressing a letter. The selector is the name on the envelope. Without it, the styles have nowhere to go.',
+    example:'p          /* every paragraph */\n.card      /* class="card" */\n#top       /* id="top" */'},
+  {s:4,tag:'CSS',title:'Colors',code:false,
+    tagline:'Three ways to write a color: a name, a hex code, or rgb.',
+    body:'CSS accepts color in several forms. <strong>Named:</strong> <code>red</code>, <code>navy</code>, <code>tomato</code> (about 140 names). <strong>Hex:</strong> <code>#FF6347</code> &mdash; a # followed by 6 digits/letters (red, green, blue, two each). <strong>RGB:</strong> <code>rgb(255, 99, 71)</code> &mdash; three numbers 0&ndash;255 for red, green, blue. They all produce the same color &mdash; hex is just shorter to write.',
+    analogy:'Three ways to order coffee: by name (&ldquo;flat white&rdquo;), by recipe (&ldquo;double espresso, 120ml milk&rdquo;), or by code on the menu (&ldquo;#3&rdquo;). Same drink, different language.',
+    example:'color: tomato;\ncolor: #FF6347;\ncolor: rgb(255, 99, 71);'},
+  {s:4,tag:'CSS',title:'Box Model',code:false,
+    tagline:'Every element is a box with content, padding, border, and margin.',
+    body:'CSS treats every element as a rectangular box made of four layers, inside to outside: <strong>content</strong> (the text or image), <strong>padding</strong> (space between content and the edge), <strong>border</strong> (the edge itself), and <strong>margin</strong> (space outside, pushing other elements away). Beginners mix up padding and margin constantly &mdash; the interactive demo above this section makes it click.',
+    analogy:'A framed photo on a wall. The gap between photo and frame is <strong>padding</strong>. The frame itself is the <strong>border</strong>. The gap between this frame and the next is the <strong>margin</strong>.'},
+  {s:4,tag:'CSS',title:'Hover Effect',code:true,codeStr:':hover',
+    tagline:'Styles that activate only when a mouse hovers over an element.',
+    body:'The <code>:hover</code> pseudo-class lets you write styles that only apply when the user&rsquo;s mouse is over an element. Attach it to any selector: <code>.btn:hover { background: darkblue; }</code>. Nothing happens when the cursor is elsewhere &mdash; the moment it moves over the element, the rules activate.',
+    analogy:'A touch lamp that glows only when your hand is near it. Resting normally, reactive the moment something comes close.',
+    example:'.btn { background: blue; }\n.btn:hover { background: darkblue; }'}
+];
+const TOTAL=CONCEPTS.length;
+
+/* ============================================================
+   RENDER CARDS
+   ============================================================ */
+const SEC_IDS={1:'cards-1',2:'cards-2',3:'cards-3',4:'cards-4'};
+const TAG_CLASS={HTML:'t-html',CSS:'t-css',BOTH:'t-both'};
+const TAG_LABEL={HTML:'HTML',CSS:'CSS',BOTH:'HTML + CSS'};
+
+function renderCards(){
+  CONCEPTS.forEach((c,i)=>{
+    const wrap=document.getElementById(SEC_IDS[c.s]);
+    if(!wrap)return;
+    const titleHTML=c.code?`<code>${c.codeStr}</code>`:c.title;
+    const ex=c.example?`<div class="example">${c.example}</div>`:'';
+    wrap.insertAdjacentHTML('beforeend',`
+      <button class="kcard" id="kc${i}" type="button" aria-expanded="false">
+        <span class="ktag ${TAG_CLASS[c.tag]}">${TAG_LABEL[c.tag]}</span>
+        <h3>${titleHTML}</h3>
+        <p class="tagline">${c.tagline}</p>
+        <span class="reveal-hint">Tap to learn more &rarr;</span>
+        <div class="defbox" id="db${i}">
+          ${c.body}
+          ${ex}
+          <div class="analogy">${c.analogy}</div>
+        </div>
+      </button>`);
+  });
+  document.querySelectorAll('.kcard').forEach((el,i)=>el.addEventListener('click',()=>reveal(i)));
+}
+
+let unlocked=0;
 function reveal(i){
-  const d=document.getElementById('d'+i),c=document.getElementById('c'+i);
-  const wasOpen=d.classList.contains('open');
-  d.classList.toggle('open');
-  if(!wasOpen&&!c.classList.contains('done')){
-    c.classList.add('done');unlocked++;
-    document.getElementById('pfill').style.width=Math.round(unlocked/10*100)+'%';
-    document.getElementById('plbl').textContent=unlocked+' of 10 concepts unlocked';
+  const card=document.getElementById('kc'+i),def=document.getElementById('db'+i);
+  const wasOpen=def.classList.contains('open');
+  def.classList.toggle('open');
+  card.setAttribute('aria-expanded',!wasOpen);
+  if(!wasOpen && !card.classList.contains('done')){
+    card.classList.add('done');unlocked++;
+    document.getElementById('pfill').style.width=Math.round(unlocked/TOTAL*100)+'%';
+    document.getElementById('plbl').textContent=unlocked+' of '+TOTAL+' concepts unlocked';
+    document.getElementById('prog').setAttribute('aria-valuenow',unlocked);
   }
 }
 
-function updPM(){
-  const p=parseInt(document.getElementById('pslide').value),m=parseInt(document.getElementById('mslide').value);
-  document.getElementById('pval').textContent=p+'px';
-  document.getElementById('mval').textContent=m+'px';
-  document.getElementById('pmm').style.padding=m+'px';
-  document.getElementById('pmp').style.padding=p+'px';
+/* ============================================================
+   BOX MODEL DEMO
+   ============================================================ */
+function updBM(){
+  const m=+document.getElementById('m-slide').value;
+  const b=+document.getElementById('b-slide').value;
+  const p=+document.getElementById('p-slide').value;
+  document.getElementById('m-val').textContent=m+'px';
+  document.getElementById('b-val').textContent=b+'px';
+  document.getElementById('p-val').textContent=p+'px';
+  document.getElementById('bm-m').style.padding=m+'px';
+  document.getElementById('bm-b').style.borderWidth=b+'px';
+  document.getElementById('bm-p').style.padding=p+'px';
 }
-updPM();
+['m-slide','b-slide','p-slide'].forEach(id=>document.getElementById(id).addEventListener('input',updBM));
+updBM();
 
-function runSand(){
-  const f=document.getElementById('sframe');
+/* ============================================================
+   LIVE PLAYGROUND
+   ============================================================ */
+const PRESETS={
+  card:{
+    html:'<div class="card">\n  <h2>Ada Lovelace</h2>\n  <p class="role">Mathematician &middot; 1815&ndash;1852</p>\n  <p>Often regarded as the first computer programmer.</p>\n  <button class="btn">Read more</button>\n</div>',
+    css:'.card {\n  background: #fff;\n  border-radius: 12px;\n  padding: 24px;\n  max-width: 320px;\n  box-shadow: 0 4px 14px rgba(0,0,0,.08);\n  font-family: system-ui, sans-serif;\n}\n.card h2 { margin: 0 0 4px; color: #1F1E1B; }\n.role { color: #8B8780; font-size: 13px; margin: 0 0 12px; }\n.card p { color: #5C5852; font-size: 14px; line-height: 1.5; }\n.btn {\n  background: #185FA5; color: #fff;\n  border: none; padding: 8px 16px;\n  border-radius: 6px; margin-top: 12px;\n  cursor: pointer;\n}\n.btn:hover { background: #0C447C; }'
+  },
+  list:{
+    html:'<h2>My weekend plans</h2>\n<ol class="todo">\n  <li>Walk in the park</li>\n  <li>Make pancakes</li>\n  <li>Read a book</li>\n  <li>Call mum</li>\n</ol>',
+    css:'body { font-family: Georgia, serif; padding: 1rem; }\nh2 { color: #185FA5; margin: 0 0 12px; }\n.todo {\n  list-style: none;\n  padding: 0;\n  counter-reset: t;\n}\n.todo li {\n  padding: 10px 14px 10px 40px;\n  background: #F1EFE9;\n  border-radius: 8px;\n  margin-bottom: 6px;\n  position: relative;\n  counter-increment: t;\n}\n.todo li::before {\n  content: counter(t);\n  position: absolute; left: 12px; top: 10px;\n  width: 20px; height: 20px;\n  background: #185FA5; color: #fff;\n  border-radius: 50%;\n  display: flex; align-items: center; justify-content: center;\n  font-size: 11px; font-weight: 600;\n}'
+  },
+  hero:{
+    html:'<section class="hero">\n  <span class="badge">New</span>\n  <h1>Build something today.</h1>\n  <p>Small steps beat perfect plans. Start with one tiny page.</p>\n  <a href="#" class="cta">Start learning</a>\n</section>',
+    css:'body { margin: 0; font-family: system-ui, sans-serif; }\n.hero {\n  background: linear-gradient(135deg, #185FA5, #3C3489);\n  color: #fff;\n  padding: 40px 24px;\n  text-align: center;\n}\n.badge {\n  background: rgba(255,255,255,.2);\n  padding: 4px 10px;\n  border-radius: 20px;\n  font-size: 11px;\n  text-transform: uppercase;\n  letter-spacing: 1px;\n}\n.hero h1 {\n  font-size: 28px;\n  margin: 12px 0 6px;\n}\n.hero p { opacity: .85; margin: 0 0 16px; }\n.cta {\n  background: #fff; color: #185FA5;\n  padding: 10px 20px;\n  border-radius: 6px;\n  text-decoration: none;\n  font-weight: 600;\n}\n.cta:hover { background: #FAEEDA; }'
+  },
+  form:{
+    html:'<form class="contact">\n  <h2>Say hello</h2>\n  <label>Your name\n    <input type="text" placeholder="Ada">\n  </label>\n  <label>Email\n    <input type="email" placeholder="you@example.com">\n  </label>\n  <label>Message\n    <textarea rows="3" placeholder="Hi!"></textarea>\n  </label>\n  <button type="submit">Send</button>\n</form>',
+    css:'body { font-family: system-ui, sans-serif; padding: 1rem; background: #F7F5F0; }\n.contact {\n  max-width: 320px;\n  background: #fff;\n  padding: 20px;\n  border-radius: 12px;\n  box-shadow: 0 2px 8px rgba(0,0,0,.05);\n}\n.contact h2 { margin: 0 0 14px; color: #1F1E1B; }\nlabel {\n  display: block;\n  font-size: 12px;\n  color: #5C5852;\n  margin-bottom: 12px;\n}\ninput, textarea {\n  display: block; width: 100%;\n  padding: 8px 10px; margin-top: 4px;\n  border: 1px solid #CDC8BA;\n  border-radius: 6px;\n  font: inherit;\n}\ninput:focus, textarea:focus {\n  outline: none; border-color: #185FA5;\n}\nbutton {\n  background: #185FA5; color: #fff;\n  border: none; padding: 9px 18px;\n  border-radius: 6px; cursor: pointer;\n  font-weight: 500;\n}\nbutton:hover { background: #0C447C; }'
+  }
+};
+
+const pgHtml=document.getElementById('pg-html');
+const pgCss=document.getElementById('pg-css');
+function loadPreset(name){
+  const p=PRESETS[name]||PRESETS.card;
+  pgHtml.value=p.html;
+  pgCss.value=p.css;
+  runPG();
+}
+function runPG(){
+  const f=document.getElementById('pg-frame');
   const doc=f.contentDocument||f.contentWindow.document;
   doc.open();
-  doc.write('<style>*{margin:0;padding:0;box-sizing:border-box}body{padding:16px;font-family:Georgia,serif}'+document.getElementById('scss').value+'</style>'+document.getElementById('shtml').value);
+  doc.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><style>*{box-sizing:border-box}body{margin:0;font-family:system-ui,sans-serif;padding:16px;color:#1F1E1B}'+pgCss.value+'</style></head><body>'+pgHtml.value+'</body></html>');
   doc.close();
-  setTimeout(()=>{f.style.height=Math.max(f.contentWindow.document.body.scrollHeight+20,100)+'px';},100);
+  setTimeout(()=>{
+    try{f.style.height=Math.max(f.contentWindow.document.body.scrollHeight+24,160)+'px';}catch(e){}
+  },80);
 }
-document.getElementById('shtml').addEventListener('input',()=>setTimeout(runSand,300));
-document.getElementById('scss').addEventListener('input',()=>setTimeout(runSand,300));
-setTimeout(runSand,800);
+function resetPG(){loadPreset('card');}
+let pgTimer;
+pgHtml.addEventListener('input',()=>{clearTimeout(pgTimer);pgTimer=setTimeout(runPG,250);});
+pgCss.addEventListener('input',()=>{clearTimeout(pgTimer);pgTimer=setTimeout(runPG,250);});
+document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>loadPreset(b.dataset.preset)));
 
-const qdata=[
-  {q:"What does HTML stand for?",opts:["HyperText Markup Language","High Tech Machine Learning","HyperText Making Language","Helpful Text Markup Logic"],a:0,ok:"Correct! HTML = HyperText Markup Language. It labels content so the browser knows what to display.",bad:"Not quite. HTML stands for HyperText Markup Language — it labels content (headings, paragraphs, images) for the browser."},
-  {q:"What is the main job of CSS?",opts:["Writing the structure of a webpage","Making HTML look beautiful with colors, fonts and layout","Connecting the webpage to the internet","Storing user data"],a:1,ok:"Exactly right. CSS handles the visual layer — colors, fonts, spacing, and all the styling.",bad:"CSS handles the visual/styling layer. HTML builds the structure; CSS makes it look good."},
-  {q:"What does a closing tag look like?",opts:["<p>","<p/>","</p>","[/p]"],a:2,ok:"Perfect. Closing tags have a forward slash before the tag name: </p>",bad:"Closing tags have a forward slash like </p> — the slash signals the browser that the element ends here."},
-  {q:"In CSS, what does a dot (.) before a name mean?",opts:["It selects all elements","It selects by element ID","It selects elements by class name","It writes a comment"],a:2,ok:"Spot on! A dot in CSS means select by class name. .bio finds all elements with class='bio'.",bad:"A dot is the class selector. Writing .bio { } targets every element that has class='bio' in the HTML."},
-  {q:"What is the difference between padding and margin?",opts:["They are exactly the same","Padding is outside the box, margin is inside","Padding is inside the box, margin is outside","Margin changes color, padding changes size"],a:2,ok:"100% correct. Padding = space inside. Margin = space outside. Try the interactive slider above to see this visually.",bad:"Remember: Padding is inside the box (between content and border). Margin is outside (between the box and its neighbors)."},
-  {q:"What does a <div> element do by itself?",opts:["It displays a large heading","It shows a button","It creates an invisible container to group elements","It links to another page"],a:2,ok:"Exactly right. A div is invisible by itself — its purpose is to group elements together so CSS can style them as one unit.",bad:"A div is just an invisible container. It groups elements so you can style the whole group with one CSS class."}
+/* ============================================================
+   QUIZ
+   ============================================================ */
+const QUIZ=[
+  {q:'What does HTML stand for?',opts:['HyperText Markup Language','High Tech Machine Learning','HyperText Making Language','Helpful Text Markup Logic'],a:0,
+    ok:'Correct &mdash; HTML = <strong>HyperText Markup Language</strong>. It labels content so the browser knows what to display.',
+    bad:'Not quite. HTML stands for <strong>HyperText Markup Language</strong> &mdash; it labels content (headings, paragraphs, images) for the browser.'},
+  {q:'Which of these is the correct shape of an HTML document?',opts:['<code>&lt;html&gt;&lt;head&gt;&lt;body&gt;</code> &mdash; in that order, head before body','<code>&lt;body&gt;&lt;head&gt;&lt;html&gt;</code> &mdash; body always first','<code>&lt;head&gt;&lt;body&gt;</code> only &mdash; no html wrapper needed','<code>&lt;html&gt;&lt;body&gt;&lt;head&gt;</code> &mdash; head goes inside body'],a:0,
+    ok:'Spot on. The <code>&lt;html&gt;</code> tag wraps everything, then <code>&lt;head&gt;</code> (invisible info) comes before <code>&lt;body&gt;</code> (visible content).',
+    bad:'The structure is: <code>&lt;html&gt;</code> wraps everything, with <code>&lt;head&gt;</code> first (invisible metadata) and <code>&lt;body&gt;</code> second (visible content).'},
+  {q:'What does a closing tag look like?',opts:['<code>&lt;p&gt;</code>','<code>&lt;p/&gt;</code>','<code>&lt;/p&gt;</code>','<code>[/p]</code>'],a:2,
+    ok:'Perfect. Closing tags have a forward slash before the name: <code>&lt;/p&gt;</code>.',
+    bad:'Closing tags have a forward slash like <code>&lt;/p&gt;</code> &mdash; the slash signals the element ends here.'},
+  {q:'What is the difference between a tag and an element?',opts:['Tags are for HTML, elements are for CSS','A tag is just the label (<code>&lt;p&gt;</code>); an element is the full thing (opening + content + closing)','An element is smaller than a tag','They are identical &mdash; just two words for the same thing'],a:1,
+    ok:'Exactly. The tag is the label. The <em>element</em> is the complete unit &mdash; opening tag + content + closing tag.',
+    bad:'A tag is just the label (like <code>&lt;p&gt;</code>). The <em>element</em> is the whole package: opening tag + content + closing tag together.'},
+  {q:'Why does an <code>&lt;img&gt;</code> tag need an <code>alt</code> attribute?',opts:['It makes images load faster','It is a description used by screen readers and shown if the image fails to load','It is required for SEO and nothing else','It changes the size of the image'],a:1,
+    ok:'Yes &mdash; <code>alt</code> describes the image for users who can&rsquo;t see it (screen readers, broken images, slow networks). Always include it.',
+    bad:'The <code>alt</code> attribute is the image&rsquo;s text description &mdash; it&rsquo;s read by screen readers and shown when the image can&rsquo;t load. Always include it.'},
+  {q:'Which element makes a bulleted list?',opts:['<code>&lt;ol&gt;</code>','<code>&lt;list&gt;</code>','<code>&lt;ul&gt;</code>','<code>&lt;dl&gt;</code>'],a:2,
+    ok:'Right &mdash; <code>&lt;ul&gt;</code> is &ldquo;unordered list&rdquo; (bullets). <code>&lt;ol&gt;</code> would be numbered.',
+    bad:'<code>&lt;ul&gt;</code> = unordered list (bullets). <code>&lt;ol&gt;</code> = ordered list (numbers). Both hold <code>&lt;li&gt;</code> items.'},
+  {q:'In CSS, what does a dot (<code>.</code>) before a name mean?',opts:['Select by ID','Select all elements','Select by class name','Insert a comment'],a:2,
+    ok:'Spot on. A dot is the class selector. <code>.bio</code> finds every element with <code>class="bio"</code>.',
+    bad:'A dot in CSS is the <strong>class</strong> selector. Writing <code>.bio { }</code> targets every element with <code>class="bio"</code>.'},
+  {q:'In CSS, what does a <code>#</code> before a name mean?',opts:['It selects by ID','It is a comment','It selects all paragraphs','It writes a color'],a:0,
+    ok:'Yes. <code>#</code> targets an element by its <code>id</code> attribute. IDs must be unique on a page.',
+    bad:'<code>#</code> is the <strong>ID</strong> selector. <code>#contact { }</code> targets the element with <code>id="contact"</code>. IDs must be unique.'},
+  {q:'What is the difference between padding and margin?',opts:['They are exactly the same','Padding is outside the box, margin is inside','Padding is inside the box, margin is outside','Margin changes color, padding changes size'],a:2,
+    ok:'100% correct. Padding = space <em>inside</em>. Margin = space <em>outside</em>. The slider demo above shows it visually.',
+    bad:'Remember: padding is <em>inside</em> the box (between content and border). Margin is <em>outside</em> (between the box and its neighbors).'},
+  {q:'Which of these is a valid way to write the color red?',opts:['<code>color: red;</code>','<code>color: #FF0000;</code>','<code>color: rgb(255, 0, 0);</code>','All three are valid'],a:3,
+    ok:'Correct &mdash; all three describe the exact same color. Named, hex, and rgb are interchangeable.',
+    bad:'Actually all three are valid &mdash; CSS accepts color as a name, a hex code (<code>#FF0000</code>), or rgb() values. They all produce the same red.'},
+  {q:'What does the <code>&lt;header&gt;</code> tag do that a <code>&lt;div&gt;</code> can&rsquo;t?',opts:['Nothing &mdash; they look identical','It gives the element <em>meaning</em>: screen readers and search engines know it&rsquo;s the top section','It automatically styles itself','It adds a border'],a:1,
+    ok:'Right. Semantically, <code>&lt;header&gt;</code> tells assistive tech and search engines &ldquo;this is the top of the page or section&rdquo;. A <code>&lt;div&gt;</code> would just be a generic box.',
+    bad:'Semantic tags like <code>&lt;header&gt;</code> add <em>meaning</em> &mdash; screen readers, search engines and developers all know what role the element plays. A <code>&lt;div&gt;</code> is just a generic, meaningless box.'},
+  {q:'What does <code>:hover</code> do in CSS?',opts:['Hides an element','Applies styles only when the mouse is over the element','Animates an element','Makes text bold'],a:1,
+    ok:'Exactly. <code>:hover</code> activates a set of styles only while the cursor is on the element &mdash; perfect for buttons and links.',
+    bad:'<code>:hover</code> applies styles only while the mouse is over the element. It&rsquo;s how buttons change color when you hover over them.'}
 ];
-let qi=0,answered=false;
-
+let qi=0,qscore=0,answered=false,answeredSet=new Set();
 function renderQ(){
-  const q=qdata[qi];
-  document.getElementById('qq').textContent=q.q;
-  document.getElementById('qctr').textContent=(qi+1)+' / '+qdata.length;
+  const q=QUIZ[qi];
+  document.getElementById('qq').innerHTML=q.q;
+  document.getElementById('qctr').textContent=(qi+1)+' / '+QUIZ.length;
+  document.getElementById('qscore').textContent='Score: '+qscore;
   const o=document.getElementById('qopts');o.innerHTML='';
-  q.opts.forEach((opt,i)=>{o.innerHTML+=`<button class="qopt" onclick="ansQ(${i})">${opt}</button>`;});
-  document.getElementById('qfb').className='qfb';
-  document.getElementById('qfb').textContent='';
-  answered=false;
+  const letters=['A','B','C','D'];
+  q.opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='qopt';btn.type='button';
+    btn.innerHTML='<span class="q-letter">'+letters[i]+'</span><span class="q-content">'+opt+'</span>';
+    btn.addEventListener('click',()=>ansQ(i));
+    o.appendChild(btn);
+  });
+  const fb=document.getElementById('qfb');fb.className='qfb';fb.textContent='';
+  answered=answeredSet.has(qi);
+  document.getElementById('qprev').disabled=qi===0;
 }
-
 function ansQ(i){
-  if(answered)return;answered=true;
-  const q=qdata[qi];
-  document.querySelectorAll('.qopt')[i].classList.add(i===q.a?'correct':'wrong');
-  document.querySelectorAll('.qopt')[q.a].classList.add('correct');
+  if(answered)return;
+  answered=true;answeredSet.add(qi);
+  const q=QUIZ[qi];
+  const opts=document.querySelectorAll('.qopt');
+  opts.forEach(o=>o.disabled=true);
+  opts[i].classList.add(i===q.a?'correct':'wrong');
+  opts[q.a].classList.add('correct');
   const fb=document.getElementById('qfb');
-  fb.textContent=i===q.a?q.ok:q.bad;
+  fb.innerHTML=i===q.a?q.ok:q.bad;
   fb.className='qfb show '+(i===q.a?'good':'bad');
+  if(i===q.a){qscore++;document.getElementById('qscore').textContent='Score: '+qscore;}
 }
+function nextQ(){qi=(qi+1)%QUIZ.length;renderQ();}
+function prevQ(){if(qi>0){qi--;renderQ();}}
 
-function nextQ(){qi=(qi+1)%qdata.length;renderQ();}
-renderQ();
-
-const cl=document.getElementById('clitems');
-concepts.forEach((c,i)=>{
-  cl.innerHTML+=`<div class="cl-item" id="cli${i}" onclick="toggleCL(${i})"><div class="cl-check" id="clc${i}"></div>${c}</div>`;
-});
-
+/* ============================================================
+   CHECKLIST
+   ============================================================ */
+function renderCL(){
+  const cl=document.getElementById('clitems');
+  cl.innerHTML='';
+  CONCEPTS.forEach((c,i)=>{
+    const label=c.code?`<code style="font-family:var(--font-mono);font-size:13px">${c.codeStr}</code>`:c.title;
+    cl.insertAdjacentHTML('beforeend',`<div class="cl-item" id="cli${i}" role="checkbox" aria-checked="false" tabindex="0"><div class="cl-check" id="clc${i}"></div>${label}</div>`);
+  });
+  document.querySelectorAll('.cl-item').forEach((el,i)=>{
+    el.addEventListener('click',()=>toggleCL(i));
+    el.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();toggleCL(i);}});
+  });
+}
+const ticked=new Set();
 function toggleCL(i){
   const item=document.getElementById('cli'+i),chk=document.getElementById('clc'+i);
-  if(ticked.has(i)){ticked.delete(i);item.classList.remove('ticked');chk.textContent='';}
-  else{ticked.add(i);item.classList.add('ticked');chk.textContent='✓';}
+  if(ticked.has(i)){ticked.delete(i);item.classList.remove('ticked');chk.textContent='';item.setAttribute('aria-checked','false');}
+  else{ticked.add(i);item.classList.add('ticked');chk.textContent='✓';item.setAttribute('aria-checked','true');}
 }
+function resetCL(){
+  ticked.forEach(i=>{
+    document.getElementById('cli'+i).classList.remove('ticked');
+    document.getElementById('clc'+i).textContent='';
+    document.getElementById('cli'+i).setAttribute('aria-checked','false');
+  });
+  ticked.clear();
+}
+
+/* ============================================================
+   BOOT
+   ============================================================ */
+renderCards();
+renderQ();
+renderCL();
+loadPreset('card');
 </script>
-</div>
+</body>
+</html>
